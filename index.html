@@ -1,454 +1,585 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Xuanhua He</title>
-  <link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
-  <link rel="shortcut icon" type="image/x-icon" href="images/misc/favicon.png">
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-  <!-- Bulma Version 0.7.5-->
-  <link rel="stylesheet" href="https://unpkg.com/bulma@0.7.5/css/bulma.min.css" />
-  <link href='css/style.css?_t=20200916' rel='stylesheet' type='text/css'>
-  <script defer src="font-awesome/js/brands.min.js"></script>
-  <script defer src="font-awesome/js/regular.min.js"></script>
-  <script defer src="font-awesome/js/fontawesome.min.js"></script>
-    <style>
-      .red {
-        color: rgb(238, 76, 44);
-        font-style: normal;
-      }
-      .blue {
-        color: rgb(238, 76, 44);
-        font-style: normal;
-      }
-       
-      #intro {
-       margin-top: 0em !important;
-      }
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    :root {
+      /* Apple System Colors */
+      --bg-body: #f5f5f7;
+      --bg-card: #ffffff;
+      --text-primary: #1d1d1f;
+      --text-secondary: #86868b;
+      --accent-blue: #0066cc;
+      --btn-bg: #e8e8ed;
+      --btn-hover: #d2d2d7;
       
-      .content h3 {
-       margin-bottom: 1em!important;
-       margin-top: 2em!important;
-      }
-
-      .content figure {
-       width: 90%;
-       display: flex;
-       align-items: center;
-       overflow: hidden;
-       margin-left: auto!important;
-       margin-right: auto!important;
-      }
+      --shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
+      --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+      --shadow-hover: 0 12px 30px rgba(0,0,0,0.12);
       
-      .columns:not(:last-child) {
-       margin-bottom: 1.75rem!important;
-      }
+      --radius: 18px;
+      --font-stack: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+    }
 
-      #sidebar {
-        width: 75%;
-      }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
-      @media screen and (min-width: 769px), print {
-        .column.is-2_5, .column.is-2-tablet {
-          flex: none;
-          width: 20%;
-        }
-      }
-</style>
-    <script src="https://code.jquery.com/jquery-3.1.1.min.js" crossorigin="anonymous"></script>
+    body {
+      background-color: var(--bg-body);
+      color: var(--text-primary);
+      font-family: var(--font-stack);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { text-decoration: none; color: var(--accent-blue); transition: 0.2s; }
+    a:hover { color: #004499; }
+
+    /* --- LAYOUT --- */
+    .container {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 60px 30px;
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 50px;
+    }
+
+    /* --- SIDEBAR --- */
+    .sidebar {
+      position: sticky;
+      top: 40px;
+      height: fit-content;
+    }
+
+    .profile-card {
+      background: var(--bg-card);
+      padding: 30px 20px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-md);
+      text-align: center;
+    }
+
+    .avatar {
+      width: 140px;
+      height: 140px;
+      object-fit: cover;
+      border-radius: 50%;
+      margin-bottom: 15px;
+      border: 1px solid rgba(0,0,0,0.05);
+    }
+
+    .name { font-size: 22px; font-weight: 700; margin-bottom: 4px; color: #000; }
+    .role { font-size: 14px; color: var(--text-secondary); margin-bottom: 20px; }
+
+    .social-links { display: flex; justify-content: center; gap: 12px; margin-top: 15px; }
+    .social-btn {
+      width: 34px; height: 34px;
+      display: flex; align-items: center; justify-content: center;
+      background: var(--btn-bg);
+      border-radius: 50%;
+      color: #333;
+      transition: 0.2s;
+    }
+    .social-btn:hover { background: #333; color: #fff; transform: scale(1.1); }
+
+    .nav-menu { margin-top: 30px; text-align: left; list-style: none; }
+    .nav-link {
+      display: block; padding: 8px 12px;
+      color: var(--text-secondary);
+      font-weight: 500; font-size: 14px;
+      border-radius: 8px;
+    }
+    .nav-link:hover, .nav-link.active { background: rgba(0,0,0,0.04); color: #000; }
+
+    /* --- MAIN CONTENT --- */
+    section { margin-bottom: 50px; scroll-margin-top: 50px; }
+
+    h2 {
+      font-size: 26px; font-weight: 700;
+      margin-bottom: 20px; color: #000;
+      letter-spacing: -0.01em;
+    }
+
+    /* --- NEWS SCROLLABLE (Updated) --- */
+    .news-card {
+      background: var(--bg-card);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .news-scroll-area {
+      max-height: 180px; /* Limits height to approx 3-4 items */
+      overflow-y: auto;  /* Adds vertical scroll */
+      padding-right: 10px; /* Avoid scrollbar covering text */
+    }
+
+    /* Custom macOS-style Scrollbar */
+    .news-scroll-area::-webkit-scrollbar { width: 6px; }
+    .news-scroll-area::-webkit-scrollbar-track { background: transparent; }
+    .news-scroll-area::-webkit-scrollbar-thumb {
+      background-color: rgba(0,0,0,0.1);
+      border-radius: 10px;
+    }
+    .news-scroll-area:hover::-webkit-scrollbar-thumb { background-color: rgba(0,0,0,0.3); }
+
+    .news-item {
+      display: grid;
+      grid-template-columns: 85px 1fr;
+      margin-bottom: 12px;
+      font-size: 14px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    .news-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+    .news-date { color: var(--text-secondary); font-variant-numeric: tabular-nums; font-weight: 500; }
+
+    /* --- TOPIC HEADERS (Updated) --- */
+    .topic-title {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-secondary);
+      font-weight: 600;
+      margin: 30px 0 15px 0;
+      border-bottom: 1px solid #e5e5e5;
+      padding-bottom: 8px;
+    }
+
+    /* --- PAPER CARDS (Updated for Aspect Ratio) --- */
+    .paper-card {
+      background: var(--bg-card);
+      border-radius: var(--radius);
+      padding: 24px;
+      margin-bottom: 20px;
+      display: flex;
+      gap: 25px;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      border: 1px solid rgba(0,0,0,0.02);
+    }
+
+    .paper-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    /* Fixed 16:9 Landscape Ratio Container */
+    .paper-img {
+      width: 240px; /* Wider to avoid crop */
+      height: 135px; /* 16:9 Aspect Ratio */
+      flex-shrink: 0;
+      border-radius: 10px;
+      overflow: hidden;
+      background: #000;
+      position: relative;
+      border: 1px solid rgba(0,0,0,0.05);
+    }
+    
+    .paper-img img, .paper-img video {
+      width: 100%; height: 100%;
+      object-fit: cover; /* Change to 'contain' if you want zero crop, but 'cover' looks better */
+    }
+
+    .paper-content { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+
+    .paper-title { font-size: 18px; font-weight: 600; margin-bottom: 6px; line-height: 1.35; color: #000; }
+    .paper-authors { font-size: 14px; color: var(--text-secondary); margin-bottom: 10px; line-height: 1.5; }
+    
+    .paper-venue {
+      font-size: 12px; font-weight: 600; color: #000;
+      background: #f2f2f7; padding: 4px 10px; border-radius: 6px;
+      display: inline-block; margin-right: 10px;
+    }
+    .highlight { background: rgba(0, 102, 204, 0.1); color: var(--accent-blue); }
+
+    .btn-row { margin-top: 12px; display: flex; gap: 10px; }
+    .btn-pill {
+      font-size: 12px; font-weight: 600;
+      padding: 5px 12px;
+      background: var(--btn-bg); color: #333;
+      border-radius: 20px; display: flex; align-items: center; gap: 5px;
+      transition: 0.2s;
+    }
+    .btn-pill:hover { background: #d1d1d6; color: #000; }
+
+    /* --- RESPONSIVE --- */
+    @media (max-width: 800px) {
+      .container { grid-template-columns: 1fr; padding: 20px; gap: 30px; }
+      .sidebar { position: static; margin-bottom: 20px; }
+      .paper-card { flex-direction: column; gap: 15px; }
+      .paper-img { width: 100%; height: auto; aspect-ratio: 16/9; }
+      .nav-menu { display: none; }
+    }
+  </style>
 </head>
 
-
 <body>
-  <section class="section">
-    <div class="container">
-      <div class="columns">
-        <div class="column is-2_5">
-          <div class="sticky">
-            <figure class="image" style="width: 11.6rem; margin-top: 6px;">
-              <img src="images/misc/mainfig.jpg">
-            </figure>
-            <div class="content">
-              <h2 style="margin-top: 1em">Xuanhua He<br/> (何炫华)</h2>
-              <p>
-                <b>HKUST</b><br/> 
-                HongKong
-              </p>
-            </div>
-            <!-- social network icons -->
-            <div class="social">
-              <a href="https://github.com/alexhe101" target="_blank">
-                <span class="fab fa-github fa-2x" style="display:inline; text-decoration: none; color: #4a4a4a;"></span>
-              </a>
-               <a href="https://scholar.google.com/citations?user=-bDAN2YAAAAJ" target="_blank">
-                <span class="fab fa-google fa-2x" style="display:inline; text-decoration: none; color: #4a4a4a; margin-left: 15px"></span>
-              </a> 
-<!--               <a href="https://www.linkedin.com/in/zudi-lin/" target="_blank">
-                <span class="fab fa-linkedin fa-2x" style="display:inline; text-decoration: none; color: #4a4a4a; margin-left: 15px"></span>
-              </a> -->
-              <a href="mailto:hexuanhua@mail.ustc.edu.cn" target="_blank">
-                <span class="fa-regular fa-envelope fa-2x" style="display:inline; text-decoration: none; color: #4a4a4a; margin-left: 15px"></span>
-              </a>
+
+  <div class="container">
+    
+    <!-- LEFT SIDEBAR -->
+    <aside class="sidebar">
+      <div class="profile-card">
+        <img src="images/misc/mainfig.jpg" alt="Xuanhua He" class="avatar">
+        <h1 class="name">Xuanhua He</h1>
+        <div class="role">Ph.D. Student @ HKUST</div>
+        
+        <div class="social-links">
+          <a href="mailto:hexuanhua@mail.ustc.edu.cn" class="social-btn"><i class="fa-solid fa-envelope"></i></a>
+          <a href="https://scholar.google.com/citations?user=-bDAN2YAAAAJ" target="_blank" class="social-btn"><i class="fa-solid fa-graduation-cap"></i></a>
+          <a href="https://github.com/alexhe101" target="_blank" class="social-btn"><i class="fa-brands fa-github"></i></a>
+        </div>
+
+        <ul class="nav-menu">
+          <li><a href="#about" class="nav-link active">About</a></li>
+          <li><a href="#news" class="nav-link">News</a></li>
+          <li><a href="#publications" class="nav-link">Publications</a></li>
+          <li><a href="#experience" class="nav-link">Experience</a></li>
+          <li><a href="#awards" class="nav-link">Awards</a></li>
+        </ul>
+      </div>
+    </aside>
+
+    <!-- RIGHT CONTENT -->
+    <main>
+      
+      <!-- ABOUT -->
+      <section id="about">
+        <h2>About Me</h2>
+        <p>
+          I am currently a Ph.D. student in Computer Science and Engineering at 
+          <a href="https://www.hkust.edu.hk/" target="_blank" rel="noopener">HKUST</a>,
+          advised by <a href="https://cqf.io" target="_blank" rel="noopener">Prof. Qifeng Chen</a>.
+          Previously, I obtained my M.S. from 
+          <a href="https://en.ustc.edu.cn/" target="_blank" rel="noopener">USTC</a>,
+          working with Prof. Jie Zhang and <a href="https://auto.ustc.edu.cn/2021/0510/c25977a484824/page.htm" target="_blank" rel="noopener">Chengjun Xie</a>.
+          I received my B.Eng. degree from <a href="https://en.xmu.edu.cn/main.htm" target="_blank" rel="noopener">Xiamen University</a> in 2022, 
+          where I conducted research at the <a href="http://mocom.xmu.edu.cn/" target="_blank" rel="noopener">MOCOM Lab</a> under the guidance of 
+          <a href="http://mocom.xmu.edu.cn/static/lai-ch" target="_blank" rel="noopener">Prof. Yongxuan Lai</a>.
+        </p>
+        <p>
+          My research passion lies in <b>Generative AI</b>. 
+          Specifically, I focus on building controllable and physics-consistent <b>World Models</b> for video generation. 
+          I also have extensive experience in <b>low-level vision</b> tasks such as image restoration.
+        </p>
+                
+      </section>
+
+      <!-- NEWS (Scrollable) -->
+      <section id="news">
+        <h2>News</h2>
+        <div class="news-card">
+          <div class="news-scroll-area">
+            <div class="news-item">
+              <span class="news-date">Nov 2025</span>
+              <span>Four papers accepted to <b style="color:#000;">AAAI 2026</b>.</span>
             </div>
 
+            <div class="news-item">
+              <span class="news-date">Sep 2025</span>
+              <span>Started my Ph.D. journey at <b style="color:#000;">HKUST</b>.</span>
+            </div>
 
-            <div id="sidebar" class="menu sticky is-hidden-mobile">
-              <!-- <p class="menu-label"><b>Quick Links</b></p> -->
-              <ul class="menu-list">
-                <li><a href="#intro">About Me</a></li>
-                <li><a href="#experience">Experience</a></li>
-                <li><a href="#publications">Publications</a></li>
-                <li><a href="#awards">Awards</a></li>
-                <li><a href="#services">Services</a></li>
-              </ul>
+            <div class="news-item">
+              <span class="news-date">Sep 2025</span>
+              <span>Joined <b style="color:#000;">Meituan</b> as a Research Intern.</span>
+            </div>
+
+            <div class="news-item">
+              <span class="news-date">May 2025</span>
+              <span>Released two video editing papers on arXiv: <b>FullDiT2</b> and <b>UNIC</b>.</span>
+            </div>
+
+            <!-- Early 2025 -->
+            <div class="news-item">
+              <span class="news-date">Feb 2025</span>
+              <span>Joined <b>Kuaishou Kling AI</b> as a Research Intern.</span>
+            </div>
+            
+            <div class="news-item">
+              <span class="news-date">Feb 2025</span>
+              <span>GameGen-X accepted to <b style="color:#000;">ICLR 2025</b>!</span>
+            </div>
+            
+            <!-- 2024 -->
+            <div class="news-item">
+              <span class="news-date">Oct 2024</span>
+              <span>Released <b style="color:#000;">GameGen-X</b>, an interactive open-world game video generation model.</span>
+            </div>
+
+            <div class="news-item">
+              <span class="news-date">Oct 2024</span>
+              <span>Completed research internship at Tencent.</span>
+            </div>
+
+            <div class="news-item">
+              <span class="news-date">May 2024</span>
+              <span>Released <b style="color:#000;">ID-Animator</b>, a zero-shot identity-preserving video generation model.</span>
+            </div>
+
+            <div class="news-item">
+              <span class="news-date">Apr 2024</span>
+              <span>Joined Tencent as a Research Intern.</span>
+            </div>
+
+            <!-- <div class="news-item">
+              <span class="news-date">Jan 2024</span>
+              <span>Two paper accepted to AAAI 2024.</span>
+            </div> -->
+
+          </div>
+        </div>
+      </section>
+
+      <!-- PUBLICATIONS (Split Categories & Landscape Images) -->
+      <section id="publications">
+        <h2>Selected Publications</h2>
+        
+        <!-- Topic 1 -->
+        <div class="topic-title">Video Generation & World Models</div>
+        <article class="paper-card">
+          <div class="paper-img">
+            <img src="https://yychen233.github.io/ContextFlow-page/static/images/teaser.png" alt="ContextFlow"></img>
+          </div>
+          <div class="paper-content">
+            <div class="paper-title">ContextFlow: Training-Free Video Object Editing via Adaptive Context Enrichment
+            </div>
+            <div class="paper-authors">Yiyang Chen, <b>Xuanhua He*(corresponding author)</b>, Xiujun Ma, Yue Ma</div>
+            <div><span class="paper-venue highlight">AAAI 2026</span></div>
+            <div class="btn-row">
+              <a href="https://yychen233.github.io/ContextFlow-page/" class="btn-pill"><i class="fa-solid fa-globe"></i> Project</a>
+              <a href="https://arxiv.org/abs/2509.17818" class="btn-pill"><i class="fa-regular fa-file-pdf"></i> PDF</a>
+              <a href="https://github.com/yyChen233/ContextFlow" class="btn-pill"><i class="fa-brands fa-github"></i> Code</a>
+            </div>
+          </div>
+        </article>
+        <article class="paper-card">
+          <div class="paper-img">
+            <img src="https://fulldit2.github.io/figs/mainfig_0516_v2.png" alt="ContextFlow"></img>
+          </div>
+          <div class="paper-content">
+            <div class="paper-title">FullDiT2: Efficient In-Context Conditioning for Video Diffusion Transformers
+            </div>
+            <div class="paper-authors"><b>Xuanhua He</b>, Quande Liu, Zixuan Ye, Weicai Ye, Qiulin Wang, Xintao Wang, Qifeng Chen, Pengfei Wan, Di Zhang, Kun Gai
+            </div>
+            <div><span class="paper-venue highlight">Arxiv 2025</span></div>
+            <div class="btn-row">
+              <a href="https://fulldit2.github.io/" class="btn-pill"><i class="fa-solid fa-globe"></i> Project</a>
+              <a href="https://arxiv.org/abs/2506.04213" class="btn-pill"><i class="fa-regular fa-file-pdf"></i> PDF</a>
+            </div>
+          </div>
+        </article>
+        <article class="paper-card">
+          <div class="paper-img">
+            <video src="https://zixuan-ye.github.io/UNIC/videos/demo.mp4" muted autoplay loop playsinline></video>
+          </div>
+          <div class="paper-content">
+            <div class="paper-title">UNIC: Unified In-Context Video Editing
+            </div>
+            <div class="paper-authors">Zixuan Ye, <b>Xuanhua He*(Co-First Author)</b>, Quande Liu, Qiulin Wang, Xintao Wang, Pengfei Wan, Di Zhang, Kun Gai, Qifeng Chen, Wenhan Luo
+            </div>
+            <div><span class="paper-venue highlight">Arxiv 2025</span></div>
+            <div class="btn-row">
+              <a href="https://zixuan-ye.github.io/UNIC" class="btn-pill"><i class="fa-solid fa-globe"></i> Project</a>
+              <a href="https://arxiv.org/abs/2506.04216" class="btn-pill"><i class="fa-regular fa-file-pdf"></i> PDF</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Paper 1 -->
+        <article class="paper-card">
+          <div class="paper-img">
+            <video src="https://github.com/3A2077/3A2077.github.io/raw/main/videos/OGameGen_Func.mp4" muted autoplay loop playsinline></video>
+          </div>
+          <div class="paper-content">
+            <div class="paper-title">GameGen-X: Interactive Open-World Game Video Generation</div>
+            <div class="paper-authors">Haoxuan Che, <b>Xuanhua He*(Co-First Author)</b>, Quande Liu, Cheng Jin, Hao Chen</div>
+            <div><span class="paper-venue highlight">ICLR 2025</span></div>
+            <div class="btn-row">
+              <a href="https://gamegen-x.github.io/" class="btn-pill"><i class="fa-solid fa-globe"></i> Project</a>
+              <a href="https://arxiv.org/abs/2411.00769" class="btn-pill"><i class="fa-regular fa-file-pdf"></i> PDF</a>
+              <a href="https://github.com/GameGen-X/GameGen-X" class="btn-pill"><i class="fa-brands fa-github"></i> Code</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Paper 2 -->
+        <article class="paper-card">
+          <div class="paper-img">
+            <img src="images/id.png" alt="ID-Animator">
+          </div>
+          <div class="paper-content">
+            <div class="paper-title">ID-Animator: Zero-Shot Identity-Preserving Human Video Generation</div>
+            <div class="paper-authors"><b>Xuanhua He</b>, Quande Liu, Shengju Qian, Xin Wang, Tao Hu, Ke Cao, Keyu Yan, Jie Zhang</div>
+            <div><span class="paper-venue">ArXiv 2024</span></div>
+            <div class="btn-row">
+              <a href="https://id-animator.github.io/" class="btn-pill"><i class="fa-solid fa-globe"></i> Project</a>
+              <a href="https://arxiv.org/abs/2404.15275" class="btn-pill"><i class="fa-regular fa-file-pdf"></i> PDF</a>
+              <a href="https://github.com/ID-Animator/ID-Animator" class="btn-pill"><i class="fa-brands fa-github"></i> Code</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Topic 2 -->
+        <div class="topic-title">Low-level Vision</div>
+
+        <article class="paper-card">
+          <div class="paper-img">
+            <img src="images/publications/iccv.png" alt="FAME-Net">
+          </div>
+          <div class="paper-content">
+            <div class="paper-title">Pyramid Dual Domain Injection Network for Pan-sharpening</div>
+            <div class="paper-authors"><b>Xuanhua He</b>, Keyu Yan, Rui Li, Chengjun Xie, Jie Zhang, Man Zhou</div>
+            <div><span class="paper-venue highlight">ICCV 2023</span></div>
+            <div class="btn-row">
+              <a href="#" class="btn-pill"><i class="fa-regular fa-file-pdf"></i> Paper</a>
+              <a href="https://github.com/alexhe101/FAME-Net" class="btn-pill"><i class="fa-brands fa-github"></i> Code</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Paper 3 -->
+        <article class="paper-card">
+          <div class="paper-img">
+            <img src="images/publications/AAAI.png" alt="FAME-Net">
+          </div>
+          <div class="paper-content">
+            <div class="paper-title">Frequency-adaptive Pan-sharpening with Mixture-of-Experts</div>
+            <div class="paper-authors"><b>Xuanhua He</b>, Keyu Yan, Rui Li, Chengjun Xie, Jie Zhang, Man Zhou</div>
+            <div><span class="paper-venue highlight">AAAI 2024</span></div>
+            <div class="btn-row">
+              <a href="#" class="btn-pill"><i class="fa-regular fa-file-pdf"></i> Paper</a>
+              <a href="https://github.com/alexhe101/FAME-Net" class="btn-pill"><i class="fa-brands fa-github"></i> Code</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Paper 4 -->
+        <article class="paper-card">
+          <div class="paper-img">
+            <img src="images/publications/AAAI.png" alt="FourierISP">
+          </div>
+          <div class="paper-content">
+            <div class="paper-title">Enhancing RAW-to-sRGB with Decoupled Style Structure in Fourier Domain</div>
+            <div class="paper-authors"><b>Xuanhua He</b>, Tao Hu, Guoli Wang, Zejin Wang, Run Wang, Qian Zhang, Keyu Yan, Ziyi Chen, Rui Li, Chengjun Xie, Jie Zhang, Man Zhou</div>
+            <div><span class="paper-venue highlight">AAAI 2024</span></div>
+            <div class="btn-row">
+              <a href="#" class="btn-pill"><i class="fa-regular fa-file-pdf"></i> Paper</a>
+              <a href="https://github.com/alexhe101/FourierISP" class="btn-pill"><i class="fa-brands fa-github"></i> Code</a>
+            </div>
+          </div>
+        </article>
+
+      </section>
+
+      <!-- EXPERIENCE -->
+      <section id="experience">
+        <h2>Experience</h2>
+        <div style="background:var(--bg-card); border-radius: var(--radius); padding: 10px 20px; box-shadow:var(--shadow-sm);">
+          
+          <div style="display: flex; gap: 15px; padding: 15px 0; border-bottom: 1px solid #f0f0f0;">
+            <div style="width: 45px; height: 45px; background: #fff; padding: 5px; border-radius: 8px; border: 1px solid #eee;">
+               <img src="images/misc/meituan.png" style="width:100%; height:100%; object-fit:contain;">
+            </div>
+            <div>
+              <div style="font-weight: 600;">Meigen, Meituan</div>
+              <div style="font-size: 14px; color: var(--text-secondary);">Research Intern · Topic: Video Avatar and World Model · Mentor: <a href="https://yzhang2016.github.io/" target="_blank" rel="noopener">Yong Zhang</a></div>
+              <div style="font-size: 12px; color: #999;">Sep 2025 - Present</div>
+            </div>
+          </div>
+          <div style="display: flex; gap: 15px; padding: 15px 0; border-bottom: 1px solid #f0f0f0;">
+            <div style="width: 45px; height: 45px; background: #fff; padding: 5px; border-radius: 8px; border: 1px solid #eee;">
+               <img src="images/misc/kuaishou.jpg" style="width:100%; height:100%; object-fit:contain;">
+            </div>
+
+            <div>
+              <div style="font-weight: 600;">Kling AI Team, Kuaishou</div>
+              <div style="font-size: 14px; color: var(--text-secondary);">Research Intern · Topic: Video Editing · Mentor: <a href="https://liuquande.github.io/" target="_blank" rel="noopener">Quande Liu</a></div>
+              <div style="font-size: 12px; color: #999;">Feb 2025 - Aug 2025</div>
             </div>
           </div>
 
-
-
-        </div>
-        <div class="column right-panel">
-          <div class="content">
-
-
-            <!--About Me-->
-            <h2 id="intro">About Me</h2>
-<p>
-  I am currently a Ph.D. student in Computer Science and Engineering (CSE) at the
-  <a href="https://www.hkust.edu.hk/" target="_blank" rel="noopener">Hong Kong University of Science and Technology (HKUST)</a>,
-  supervised by <a href="https://cqf.io" target="_blank" rel="noopener">Prof. Qifeng Chen</a>.
-  I received my M.S. from the
-  <a href="https://en.ustc.edu.cn/" target="_blank" rel="noopener">University of Science and Technology of China (USTC)</a>,
-  advised by Professors Jie Zhang and
-  <a href="https://auto.ustc.edu.cn/2021/0510/c25977a484824/page.htm" target="_blank" rel="noopener">Chengjun Xie</a>.
-  I earned my Bachelor's degree in Software Engineering in 2022 from
-  <a href="https://en.xmu.edu.cn/main.htm" target="_blank" rel="noopener">Xiamen University</a>,
-  under the guidance of <a href="http://mocom.xmu.edu.cn/static/lai-ch" target="_blank" rel="noopener">Prof. Yongxuan Lai</a>,
-  and conducted research at the <a href="http://mocom.xmu.edu.cn/" target="_blank" rel="noopener">MOCOM Lab</a>.
-</p>
-<p>
-  My current research focuses on <b>video generation</b> and <b>world models</b>—including long-horizon, controllable, and identity-consistent video synthesis.
-  Previously, I worked on <b>low-level vision</b> problems such as image restoration.
-</p>
-            
-
-            <!--Experience-->
-            <h2 id="experience" style="margin-bottom: 25px;">Experience</h2>
-
-<!--  -->
-            <article class="columns">
-              <div class="column is-3">
-                <figure class="image">
-                  <img src="images/misc/kuaishou.png" class="img-logo">
-                </figure>
-              </div>
-              <div class="column">
-                <div class="content">
-                  <p>
-                    <b>Research Intern</b> | Kling AI team, Kuaishou Inc<br>
-                    Time: Feb 2025 - Aug 2025 Mentor: Dr. <a href="https://liuquande.github.io" target="_blank">Quande Liu</a>.<br>
-                    <b>Topic: Video Generation.</b>
-                  </p>
-                </div>
-              </div>
-            </article>
-            <article class="columns">
-              <div class="column is-3">
-                <figure class="image">
-                  <img src="images/misc/Tencent.jpg" class="img-logo">
-                </figure>
-              </div>
-              <div class="column">
-                <div class="content">
-                  <p>
-                    <b>Research Intern</b> | Tencent Inc<br>
-                    Time: Apr 2024 - Oct 2024.  <br>
-                    <b>Topic: Video Generation.</b> Mentor: Dr. <a href="https://liuquande.github.io/" target="_blank">Quande Liu</a>.<br>
-                  </p>
-                </div>
-              </div>
-            </article>
-            <article class="columns">
-              <div class="column is-3">
-                <figure class="image">
-                  <img src="images/misc/baidu.png" class="img-logo">
-                </figure>
-              </div>
-              <div class="column">
-                <div class="content">
-                  <p>
-                    <b>Computer Vision Engineer Intern</b> | Baidu Inc<br>
-                    Time: Nov 2023 - Mar 2024.  <br>
-                    <b>Topic: Diffusion Model, Image Generation, Video Generation.</b>
-                  </p>
-                </div>
-              </div>
-            </article>
-
-            <article class="columns">
-              <div class="column is-3">
-                <figure class="image">
-                  <img src="images/misc/horizon.jpg" class="img-logo">
-                </figure>
-              </div>
-              <div class="column">
-                <div class="content">
-                  <p>
-                    <b>Research Intern</b> | Horizon Robotics<br>
-                    Time: Jun 2023 - Nov 2023. Mentor: Dr. <a href="https://scholar.google.com/citations?user=z-25fk0AAAAJ&hl=en" target="_blank">Guoli Wang</a>.<br>
-                    <b>Topic: Image Restoration, Neural ISP</b>
-                  </p>
-                </div>
-              </div>
-            </article>
-
-<!--             <article class="columns">
-              <div class="column is-3">
-                <figure class="image">
-                  <img src="images/misc/aws.jpeg" class="img-logo">
-                </figure>
-              </div>
-              <div class="column">
-                <div class="content">
-                  <p>
-                    <b>Applied Scientist Intern</b> | Amazon Web Services (AWS)<br>
-                    Time: May 2021 - Sep 2021. Mentor: Dr. <a href="https://scholar.google.com/citations?user=HmnRFhgAAAAJ&hl=en" target="_blank">Erhan Bas</a>  
-                  </p>
-                </div>
-              </div>
-            </article>
- -->
-<!--             <article class="columns">
-              <div class="column is-3">
-                <figure class="image">
-                  <img src="images/misc/merl.png" class="img-logo">
-                </figure>
-              </div>
-              <div class="column">
-                <div class="content">
-                  <p>
-                    <b>Research Intern</b> | Mitsubishi Electric Research Laboratories (MERL)<br>
-                    Time: May 2019 - Aug 2019. Mentor: Dr. <a href="https://scholar.google.com/citations?user=2yqx3oIAAAAJ&hl=en" target="_blank">Ziming Zhang</a>  
-                  </p>
-                </div>
-              </div>
-            </article>
- -->
-            <!--Publications-->
-            <h2 id="publications">
-              Selected Publications
-              <span style="font-size: 1rem;margin-left: 1rem;position: relative;bottom: .2rem;">
-                <a href="https://scholar.google.com/citations?user=-bDAN2YAAAAJ&hl=en" target="_blank" style="font-size: 21px;">
-                  [Google Scholar]
-                </a>
-                <a href="" target="_blank" style="font-size: 21px;">
-                  [DBLP]
-                </a>
-              </span>
-            </h2>
-            <article class="columns">
-              <div class="column is-3">
-                <figure class="video">
-                  <video src="https://github.com/3A2077/3A2077.github.io/raw/main/videos/OGameGen_Func.mp4" controls>
-                  </video>
-                </figure>
-              </div>
-              <div class="column">
-                <div class="content">
-                  <p>
-                    <b>GameGen-X: Interactive Open-World Game Video Generation</b><br>
-                    Haoxuan Che, <b>Xuanhua He (Co-first Author) </b>, Quande Liu, Cheng Jin, Hao Chen<br>
-                    <i>2025 International Conference on Learning Representations (<b>ICLR</b>), 2025</i><br>
-                    <a href="https://gamegen-x.github.io/" target="_blank">[Paper]</a>
-                    <a href="https://arxiv.org/abs/2411.00769" target="_blank">[Arxiv]</a>
-                    <a href="https://github.com/GameGen-X/GameGen-X" target="_blank">[Code]</a>
-                  </p>
-                </div>
-              </div>
-            </article>
-            <article class="columns">
-              <div class="column is-3">
-                <figure class="image">
-                  <img src="images/id.png">
-                </figure>
-              </div>
-              <div class="column">
-                <div class="content">
-                  <p>
-                    <b>ID-Animator: Zero-Shot Identity-Preserving Human Video Generation.</b><br>
-                    <b>Xuanhua He</b>, Quande Liu, Shengju Qian, Xin Wang, Tao Hu, Ke Cao, Keyu Yan, Jie Zhang.<br>
-                    <i>ArXiv Preprint,2024</i><br>
-                    <a href="https://arxiv.org/abs/2404.15275" target="_blank">[Paper]</a>
-                    <a href="https://id-animator.github.io/" target="_blank">[Arxiv]</a>
-                    <a href="https://github.com/ID-Animator/ID-Animator" target="_blank">[Code]</a>
-                  </p>
-                </div>
-              </div>
-            </article>
-            <article class="columns">
-              <div class="column is-3">
-                <figure class="image">
-                  <img src="images/publications/AAAI.png">
-                </figure>
-              </div>
-              <div class="column">
-                <div class="content">
-                  <p>
-                    <b>Frequency-adaptive Pan-sharpening with Mixture-of-Experts</b><br>
-                    <b>Xuanhua He</b>, Keyu Yan, Rui Li, Chengjun Xie, Jie Zhang, Man Zhou<br>
-                    <i>38th Annual AAAI Conference on Artificial Intelligence (<b>AAAI</b>), 2024</i><br>
-                    <a href="https://ojs.aaai.org/index.php/AAAI/article/view/27984" target="_blank">[Paper]</a>
-                    <a href="https://arxiv.org/abs/2401.02151v1" target="_blank">[Arxiv]</a>
-                    <a href="https://github.com/alexhe101/FAME-Net" target="_blank">[Code]</a>
-                  </p>
-                </div>
-              </div>
-            </article>
-
-            <article class="columns">
-              <div class="column is-3">
-                <figure class="image">
-                  <img src="images/publications/AAAI.png">
-                </figure>
-              </div>
-              <div class="column">
-                <div class="content">
-                  <p>
-                    <b>Enhancing RAW-to-sRGB with Decoupled Style Structure in Fourier Domain</b><br>
-                    <b>Xuanhua He</b>, Tao Hu, Guoli Wang, Zejin Wang, Run Wang, Qian Zhang, Keyu Yan, Ziyi Chen, Rui Li, Chengjun Xie, Jie Zhang, Man Zhou<br>
-                    <i>38th Annual AAAI Conference on Artificial Intelligence (<b>AAAI</b>), 2024</i><br>
-                    <a href="https://ojs.aaai.org/index.php/AAAI/article/view/27985" target="_blank">[Paper]</a>
-                    <a href="https://arxiv.org/abs/2401.02161v1" target="_blank">[arXiv]</a>
-                    <a href="https://github.com/alexhe101/FourierISP" target="_blank">[Code]</a><br>
-<!--                     <em class="blue"><b>Oral Presentation</b></em> -->
-                  </p>
-                </div>
-              </div>
-              
-            </article>
-            <article class="columns">
-              <div class="column is-3">
-                <figure class="image">
-                  <img src="images/publications/iccv.png">
-                </figure>
-              </div>
-              <div class="column">
-                <div class="content">
-                  <p>
-                    <b>Pyramid Dual Domain Injection Network for Pan-sharpening</b><br>
-                    <b>Xuanhua He</b>, Keyu Yan, Rui Li, Chengjun Xie, Jie Zhang, Man Zhou<br>
-                    <i>International Conference on Computer Vision (<b>ICCV</b>), 2023</i><br>
-                    <a href="https://openaccess.thecvf.com/content/ICCV2023/papers/He_Pyramid_Dual_Domain_Injection_Network_for_Pan-sharpening_ICCV_2023_paper.pdf" target="_blank">[Paper]</a>
-                    <a href="" target="_blank">[arXiv]</a>
-                    <a href="" target="_blank">[Code]</a><br>
-<!--                     <em class="blue"><b>Oral Presentation</b></em> -->
-                  </p>
-                </div>
-              </div>
-            </article>
-
-            
-            <!--Awards-->
-            <h2 id="awards">Awards</h2>
-            <ul>
-              <li>National Scholarship, University of Science and Technology of China. 2024 </li>
-              <li>National Scholarship, University of Science and Technology of China. 2023 </li>
-              <li>Yuequn Scholarship for Academic Excellence, University of Science and Technology of China. 2023</li>
-              <!-- <li>22nd Place in 2023 OceanBase Database Competition out of 1500 teams, Alibaba Group. 2023</li> -->
-            </ul>
-
-            <h2 id="services">Services</h2>
-            <ul>
-              <li>Conference and Journal Reviewer,
-                <br>&emsp;IEEE Transactions on Geoscience and Remote Sensing (TGRS)
-                <br>&emsp;ACM MULTIMEDIA (ACM MM)
-            </ul>
+          <div style="display: flex; gap: 15px; padding: 15px 0; border-bottom: 1px solid #f0f0f0;">
+            <div style="width: 45px; height: 45px; background: #fff; padding: 5px; border-radius: 8px; border: 1px solid #eee;">
+               <img src="images/misc/Tencent.jpg" style="width:100%; height:100%; object-fit:contain;">
+            </div>
+            <div>
+              <div style="font-weight: 600;">LightSpeed, Tencent Inc</div>
+              <div style="font-size: 14px; color: var(--text-secondary);">Research Intern · Topic: Intercative Video Generation · Mentor: <a href="https://liuquande.github.io/" target="_blank" rel="noopener">Quande Liu</a></div>
+              <div style="font-size: 12px; color: #999;">Apr 2024 - Oct 2024</div>
+            </div>
           </div>
+
+          <div style="display: flex; gap: 15px; padding: 15px 0;">
+             <div style="width: 45px; height: 45px; background: #fff; padding: 5px; border-radius: 8px; border: 1px solid #eee;">
+               <img src="images/misc/baidu.png" style="width:100%; height:100%; object-fit:contain;">
+            </div>
+            <div>
+              <div style="font-weight: 600;">Baidu Inc</div>
+              <div style="font-size: 14px; color: var(--text-secondary);">CV Engineer Intern · Topic: Video Generation</div>
+              <div style="font-size: 12px; color: #999;">Nov 2023 - Mar 2024</div>
+            </div>
+          </div>
+          <div style="display: flex; gap: 15px; padding: 15px 0;">
+            <div style="width: 45px; height: 45px; background: #fff; padding: 5px; border-radius: 8px; border: 1px solid #eee;">
+              <img src="images/misc/horizon.jpg" style="width:100%; height:100%; object-fit:contain;">
+           </div>
+           <div>
+             <div style="font-weight: 600;">Horizon Robotics</div>
+             <div style="font-size: 14px; color: var(--text-secondary);">Research Intern · Topic: Low-level Vision · Mentor: <a href="https://scholar.google.com/citations?user=z-25fk0AAAAJ&hl=en" target="_blank" rel="noopener">Guoli Wang</a>.</div>
+             <div style="font-size: 12px; color: #999;">Jun 2023 - Nov 2023</div>
+           </div>
+         </div>
         </div>
-      </div>
-    </div>
-    <script type="text/javascript" src="//rf.revolvermaps.com/0/0/6.js?i=5tivn6sk3qk&amp;m=7&amp;c=e63100&amp;cr1=ffffff&amp;f=arial&amp;l=0&amp;bv=90&amp;lx=-420&amp;ly=420&amp;hi=20&amp;he=7&amp;hc=a8ddff&amp;rs=80" async="async"></script>
-    <!-- Footer -->
-    <footer class="container">
-      <br><hr>
-      <div class="row" style="text-align: center">
-        © 2022-2024 This website is modified from Zhudi-Lin.
-      </div>
-    </footer>
-  </section>
+      </section>
 
+      <!-- AWARDS -->
+      <section id="awards">
+        <h2>Awards</h2>
+        <ul style="padding-left: 20px; font-size: 15px; color: #333; line-height: 1.8;">
+          <li><b>Outstanding Graduate</b>, USTC (2025)</li>
+          <li><b>National Scholarship</b>, USTC (2023, 2024)</li>
+          <li><b>Yuequn Scholarship for Academic Excellence</b>, USTC (2023)</li>
+        </ul>
+      </section>
 
+      <footer style="margin-top: 60px; font-size: 12px; color: #999; text-align: center;">
+        © 2025 Xuanhua He. 
+      </footer>
+
+    </main>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script>
-
-    var $hashList = $('.menu-list a'), offsetList, maxScrollHeight;
-
-    $('#sidebar').on('click', 'a', function(){
-      activate($(this))
-    });
-    
-    $(window).on('resize', debounce(calculateBoundary, 300));
-
-    $(document).on('scroll', debounce(judgeScroll, 300));
-
-    calculateBoundary();
-    judgeScroll();
-    
-    function  calculateBoundary() {
-      offsetList = $hashList.map(function(idx, ele){
-        return $(ele.hash).offset().top
+    $(document).ready(function(){
+      // Smooth Scroll
+      $('a.nav-link').on('click', function(event) {
+        if (this.hash !== "") {
+          event.preventDefault();
+          var hash = this.hash;
+          $('html, body').animate({ scrollTop: $(hash).offset().top - 60 }, 500);
+        }
       });
-      maxScrollHeight = $(document).height() - $(window).height()
-    }
-    
-    function judgeScroll() {
-      var tps = $("html").scrollTop()
-              ? $("html").scrollTop()
-              : $("body").scrollTop(),
-              len = offsetList.length;
-      if(tps >= maxScrollHeight-10){
-        activate($hashList.eq(len-1));
-        return
-      }
-      for(var i=0; i<len; i++){
-       if(tps+50<offsetList[i]){
-          activate($hashList.eq(Math.max(0,i-1)));
-          return
-        }
-      }
-    }
-
-    function activate(ele){
-      $hashList.removeClass('is-active');
-      ele.addClass('is-active');
-    }
-
-    function debounce(fn, delay) {
-      var timeout = null;
-      return function () {
-        var args = arguments;
-        var context = this;
-        if (!timeout) {
-          timeout = setTimeout(function () {
-            timeout = 0;
-            return fn.apply(context, args);
-          }, delay);
-        }
-      };
-    }
-
-
-
+      
+      // Scroll Spy
+      $(window).on('scroll', function() {
+        var scrollPos = $(window).scrollTop() + 100;
+        $('section').each(function() {
+          var currLink = $('a.nav-link[href="#' + $(this).attr('id') + '"]');
+          if ($(this).position().top <= scrollPos && $(this).position().top + $(this).height() > scrollPos) {
+            $('.nav-link').removeClass("active");
+            currLink.addClass("active");
+          }
+        });
+      });
+    });
   </script>
-
-
 </body>
-
 </html>
-
-
-
-
-

@@ -71,6 +71,7 @@
       border-radius: 50%;
       margin-bottom: 15px;
       border: 1px solid rgba(0,0,0,0.05);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
     }
 
     .name { font-size: 22px; font-weight: 700; margin-bottom: 4px; color: #000; }
@@ -89,20 +90,27 @@
 
     .nav-menu { margin-top: 30px; text-align: left; list-style: none; }
     .nav-link {
-      display: block; padding: 8px 12px;
+      display: block; padding: 8px 12px 8px 12px;
       color: var(--text-secondary);
       font-weight: 500; font-size: 14px;
       border-radius: 8px;
+      border-left: 3px solid transparent;
+      margin-left: 0;
     }
-    .nav-link:hover, .nav-link.active { background: rgba(0,0,0,0.04); color: #000; }
+    .nav-link:hover { background: rgba(0,0,0,0.04); color: #000; }
+    .nav-link.active { background: rgba(0,0,0,0.04); color: #000; border-left-color: var(--accent-blue); padding-left: 9px; }
 
     /* --- MAIN CONTENT --- */
     section { margin-bottom: 50px; scroll-margin-top: 50px; }
+    #about { padding-top: 8px; }
+    #about .about-text { line-height: 1.65; }
 
     h2 {
       font-size: 26px; font-weight: 700;
       margin-bottom: 20px; color: #000;
       letter-spacing: -0.01em;
+      padding-left: 14px;
+      border-left: 4px solid var(--accent-blue);
     }
 
     /* --- NEWS SCROLLABLE (Updated) --- */
@@ -111,6 +119,12 @@
       border-radius: var(--radius);
       padding: 24px;
       box-shadow: var(--shadow-sm);
+      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      border: 1px solid rgba(0,0,0,0.02);
+    }
+    .news-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-hover);
     }
 
     .news-scroll-area {
@@ -204,9 +218,125 @@
       padding: 5px 12px;
       background: var(--btn-bg); color: #333;
       border-radius: 20px; display: flex; align-items: center; gap: 5px;
-      transition: 0.2s;
+      transition: background 0.2s, color 0.2s, transform 0.2s;
     }
-    .btn-pill:hover { background: #d1d1d6; color: #000; }
+    .btn-pill:hover { background: #d1d1d6; color: #000; transform: scale(1.02); }
+
+    /* --- VISITOR MAP --- */
+    .visitor-map-card {
+      background: var(--bg-card);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid rgba(0,0,0,0.02);
+    }
+    .visitor-map-inner {
+      min-height: 280px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(180deg, #f8f9fa 0%, #f0f1f3 100%);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .visitor-map-inner script + *,
+    .visitor-map-inner iframe { border: none; }
+    .visitor-map-note {
+      font-size: 11px;
+      color: var(--text-secondary);
+      opacity: 0.85;
+      margin-top: 12px;
+      margin-bottom: 0;
+    }
+
+    /* --- EXPERIENCE TIMELINE --- */
+    .exp-card {
+      background: var(--bg-card);
+      border-radius: var(--radius);
+      padding: 10px 20px 10px 32px;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid rgba(0,0,0,0.02);
+    }
+    .exp-timeline { position: relative; }
+    .exp-timeline::before {
+      content: '';
+      position: absolute;
+      left: -18px;
+      top: 18px;
+      bottom: 18px;
+      width: 2px;
+      background: var(--accent-blue);
+      opacity: 0.35;
+      border-radius: 1px;
+    }
+    .exp-item {
+      position: relative;
+      display: flex;
+      gap: 15px;
+      padding: 15px 0;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    .exp-item:last-child { border-bottom: none; }
+    .exp-item::before {
+      content: '';
+      position: absolute;
+      left: -24px;
+      top: 22px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--accent-blue);
+      box-sizing: border-box;
+    }
+    .exp-logo {
+      width: 45px;
+      height: 45px;
+      flex-shrink: 0;
+      background: #fff;
+      padding: 5px;
+      border-radius: 8px;
+      border: 1px solid #eee;
+    }
+    .exp-logo img { width: 100%; height: 100%; object-fit: contain; }
+    .exp-body { flex: 1; }
+    .exp-title { font-weight: 600; }
+    .exp-desc { font-size: 14px; color: var(--text-secondary); }
+    .exp-date { font-size: 12px; color: #999; }
+
+    /* --- FOOTER --- */
+    .site-footer {
+      margin-top: 60px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(0,0,0,0.08);
+      font-size: 12px;
+      color: var(--text-secondary);
+      text-align: center;
+    }
+
+    /* --- DARK MODE --- */
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg-body: #1d1d1f;
+        --bg-card: #2d2d2f;
+        --text-primary: #f5f5f7;
+        --text-secondary: #a1a1a6;
+        --accent-blue: #5eb8ff;
+        --btn-bg: #3a3a3c;
+        --btn-hover: #48484a;
+        --shadow-sm: 0 1px 2px rgba(0,0,0,0.2);
+        --shadow-md: 0 4px 12px rgba(0,0,0,0.25);
+        --shadow-hover: 0 12px 30px rgba(0,0,0,0.35);
+      }
+      .name, .paper-title, h2 { color: var(--text-primary); }
+      .social-btn { color: #e5e5e7; }
+      .social-btn:hover { background: #e5e5e7; color: #1d1d1f; }
+      .paper-venue { background: #3a3a3c; color: var(--text-primary); }
+      .paper-venue.highlight { background: rgba(94,184,255,0.15); color: var(--accent-blue); }
+      .visitor-map-inner { background: linear-gradient(180deg, #2d2d2f 0%, #252527 100%); }
+      .exp-logo { background: #38383a; border-color: #48484a; }
+      .topic-title { border-bottom-color: #404040; color: var(--text-secondary); }
+      #awards ul { color: var(--text-primary); }
+    }
 
     /* --- RESPONSIVE --- */
     @media (max-width: 800px) {
@@ -215,6 +345,8 @@
       .paper-card { flex-direction: column; gap: 15px; }
       .paper-img { width: 100%; height: auto; aspect-ratio: 16/9; }
       .nav-menu { display: none; }
+      .exp-card { padding-left: 20px; }
+      .exp-timeline::before, .exp-item::before { display: none; }
     }
   </style>
 </head>
@@ -242,6 +374,7 @@
           <li><a href="#publications" class="nav-link">Publications</a></li>
           <li><a href="#experience" class="nav-link">Experience</a></li>
           <li><a href="#awards" class="nav-link">Awards</a></li>
+          <li><a href="#visitor-map" class="nav-link">Visitor Map</a></li>
         </ul>
       </div>
     </aside>
@@ -252,6 +385,7 @@
       <!-- ABOUT -->
       <section id="about">
         <h2>About Me</h2>
+        <div class="about-text">
         <p>
           I am currently a Ph.D. student in Computer Science and Engineering at 
           <a href="https://www.hkust.edu.hk/" target="_blank" rel="noopener">HKUST</a>,
@@ -268,7 +402,7 @@
           Specifically, I focus on building controllable and physics-consistent <b>World Models</b> for video generation. 
           I also have extensive experience in <b>low-level vision</b> tasks such as image restoration.
         </p>
-                
+        </div>
       </section>
 
       <!-- NEWS (Scrollable) -->
@@ -561,61 +695,49 @@
       <!-- EXPERIENCE -->
       <section id="experience">
         <h2>Experience</h2>
-        <div style="background:var(--bg-card); border-radius: var(--radius); padding: 10px 20px; box-shadow:var(--shadow-sm);">
-          
-          <div style="display: flex; gap: 15px; padding: 15px 0; border-bottom: 1px solid #f0f0f0;">
-            <div style="width: 45px; height: 45px; background: #fff; padding: 5px; border-radius: 8px; border: 1px solid #eee;">
-               <img src="images/misc/meituan.png" style="width:100%; height:100%; object-fit:contain;">
+        <div class="exp-card">
+          <div class="exp-timeline">
+            <div class="exp-item">
+              <div class="exp-logo"><img src="images/misc/meituan.png" alt="Meituan"></div>
+              <div class="exp-body">
+                <div class="exp-title">Meigen, Meituan</div>
+                <div class="exp-desc">Research Intern · Topic: Video Avatar and World Model · Mentor: <a href="https://yzhang2016.github.io/" target="_blank" rel="noopener">Yong Zhang</a></div>
+                <div class="exp-date">Sep 2025 - Present</div>
+              </div>
             </div>
-            <div>
-              <div style="font-weight: 600;">Meigen, Meituan</div>
-              <div style="font-size: 14px; color: var(--text-secondary);">Research Intern · Topic: Video Avatar and World Model · Mentor: <a href="https://yzhang2016.github.io/" target="_blank" rel="noopener">Yong Zhang</a></div>
-              <div style="font-size: 12px; color: #999;">Sep 2025 - Present</div>
+            <div class="exp-item">
+              <div class="exp-logo"><img src="images/misc/kuaishou.jpg" alt="Kuaishou"></div>
+              <div class="exp-body">
+                <div class="exp-title">Kling AI Team, Kuaishou</div>
+                <div class="exp-desc">Research Intern · Topic: Video Editing · Mentor: <a href="https://liuquande.github.io/" target="_blank" rel="noopener">Quande Liu</a></div>
+                <div class="exp-date">Feb 2025 - Aug 2025</div>
+              </div>
             </div>
-          </div>
-          <div style="display: flex; gap: 15px; padding: 15px 0; border-bottom: 1px solid #f0f0f0;">
-            <div style="width: 45px; height: 45px; background: #fff; padding: 5px; border-radius: 8px; border: 1px solid #eee;">
-               <img src="images/misc/kuaishou.jpg" style="width:100%; height:100%; object-fit:contain;">
+            <div class="exp-item">
+              <div class="exp-logo"><img src="images/misc/Tencent.jpg" alt="Tencent"></div>
+              <div class="exp-body">
+                <div class="exp-title">LightSpeed, Tencent Inc</div>
+                <div class="exp-desc">Research Intern · Topic: Intercative Video Generation · Mentor: <a href="https://liuquande.github.io/" target="_blank" rel="noopener">Quande Liu</a></div>
+                <div class="exp-date">Apr 2024 - Oct 2024</div>
+              </div>
             </div>
-
-            <div>
-              <div style="font-weight: 600;">Kling AI Team, Kuaishou</div>
-              <div style="font-size: 14px; color: var(--text-secondary);">Research Intern · Topic: Video Editing · Mentor: <a href="https://liuquande.github.io/" target="_blank" rel="noopener">Quande Liu</a></div>
-              <div style="font-size: 12px; color: #999;">Feb 2025 - Aug 2025</div>
+            <div class="exp-item">
+              <div class="exp-logo"><img src="images/misc/baidu.png" alt="Baidu"></div>
+              <div class="exp-body">
+                <div class="exp-title">Baidu Inc</div>
+                <div class="exp-desc">CV Engineer Intern · Topic: Video Generation</div>
+                <div class="exp-date">Nov 2023 - Mar 2024</div>
+              </div>
             </div>
-          </div>
-
-          <div style="display: flex; gap: 15px; padding: 15px 0; border-bottom: 1px solid #f0f0f0;">
-            <div style="width: 45px; height: 45px; background: #fff; padding: 5px; border-radius: 8px; border: 1px solid #eee;">
-               <img src="images/misc/Tencent.jpg" style="width:100%; height:100%; object-fit:contain;">
-            </div>
-            <div>
-              <div style="font-weight: 600;">LightSpeed, Tencent Inc</div>
-              <div style="font-size: 14px; color: var(--text-secondary);">Research Intern · Topic: Intercative Video Generation · Mentor: <a href="https://liuquande.github.io/" target="_blank" rel="noopener">Quande Liu</a></div>
-              <div style="font-size: 12px; color: #999;">Apr 2024 - Oct 2024</div>
-            </div>
-          </div>
-
-          <div style="display: flex; gap: 15px; padding: 15px 0;">
-             <div style="width: 45px; height: 45px; background: #fff; padding: 5px; border-radius: 8px; border: 1px solid #eee;">
-               <img src="images/misc/baidu.png" style="width:100%; height:100%; object-fit:contain;">
-            </div>
-            <div>
-              <div style="font-weight: 600;">Baidu Inc</div>
-              <div style="font-size: 14px; color: var(--text-secondary);">CV Engineer Intern · Topic: Video Generation</div>
-              <div style="font-size: 12px; color: #999;">Nov 2023 - Mar 2024</div>
+            <div class="exp-item">
+              <div class="exp-logo"><img src="images/misc/horizon.jpg" alt="Horizon"></div>
+              <div class="exp-body">
+                <div class="exp-title">Horizon Robotics</div>
+                <div class="exp-desc">Research Intern · Topic: Low-level Vision · Mentor: <a href="https://scholar.google.com/citations?user=z-25fk0AAAAJ&hl=en" target="_blank" rel="noopener">Guoli Wang</a>.</div>
+                <div class="exp-date">Jun 2023 - Nov 2023</div>
+              </div>
             </div>
           </div>
-          <div style="display: flex; gap: 15px; padding: 15px 0;">
-            <div style="width: 45px; height: 45px; background: #fff; padding: 5px; border-radius: 8px; border: 1px solid #eee;">
-              <img src="images/misc/horizon.jpg" style="width:100%; height:100%; object-fit:contain;">
-           </div>
-           <div>
-             <div style="font-weight: 600;">Horizon Robotics</div>
-             <div style="font-size: 14px; color: var(--text-secondary);">Research Intern · Topic: Low-level Vision · Mentor: <a href="https://scholar.google.com/citations?user=z-25fk0AAAAJ&hl=en" target="_blank" rel="noopener">Guoli Wang</a>.</div>
-             <div style="font-size: 12px; color: #999;">Jun 2023 - Nov 2023</div>
-           </div>
-         </div>
         </div>
       </section>
 
@@ -629,8 +751,22 @@
         </ul>
       </section>
 
-      <footer style="margin-top: 60px; font-size: 12px; color: #999; text-align: center;">
-        © 2025 Xuanhua He. 
+      <!-- VISITOR MAP -->
+      <section id="visitor-map">
+        <h2>Visitor Map</h2>
+        <p style="font-size: 14px; color: var(--text-secondary); margin-bottom: 16px;">
+          Where visitors are from
+        </p>
+        <div class="visitor-map-card">
+          <div class="visitor-map-inner">
+            <script type="text/javascript" id="clustrmaps" src="//clustrmaps.com/map_v2.js?d=79Fjttq5hQDHFJxRgjP-UyRG2NTTAL0m3mmimF71s5w&cl=ffffff&w=a"></script>
+          </div>
+          <p class="visitor-map-note">Get your own free widget at <a href="https://www.revolvermaps.com/" target="_blank" rel="noopener">RevolverMaps.com</a> or <a href="https://clustrmaps.com/" target="_blank" rel="noopener">ClustrMaps.com</a> and replace the embed above to show real visitor data.</p>
+        </div>
+      </section>
+
+      <footer class="site-footer">
+        © 2025 Xuanhua He.
       </footer>
 
     </main>

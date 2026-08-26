@@ -3,8 +3,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Xuanhua He</title>
-  
+  <meta name="description" content="Xuanhua He — researcher building agentic world models, self-improving agents, and interactive video intelligence.">
+  <meta name="theme-color" content="#f5f5f7">
+  <title>Xuanhua He — Agentic World Models</title>
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <style>
@@ -17,11 +19,11 @@
       --accent-blue: #0066cc;
       --btn-bg: #e8e8ed;
       --btn-hover: #d2d2d7;
-      
+
       --shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
       --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
       --shadow-hover: 0 12px 30px rgba(0,0,0,0.12);
-      
+
       --radius: 18px;
       --font-stack: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
     }
@@ -45,7 +47,7 @@
       margin: 0 auto;
       padding: 60px 30px;
       display: grid;
-      grid-template-columns: 280px 1fr;
+      grid-template-columns: 280px minmax(0, 1fr);
       gap: 50px;
     }
 
@@ -99,11 +101,36 @@
     }
     .nav-link:hover { background: rgba(0,0,0,0.04); color: #000; }
     .nav-link.active { background: rgba(0,0,0,0.04); color: #000; border-left-color: var(--accent-blue); padding-left: 9px; }
+    .awards-list { padding-left: 20px; font-size: 15px; color: var(--text-primary); line-height: 1.8; }
 
     /* --- MAIN CONTENT --- */
     section { margin-bottom: 50px; scroll-margin-top: 50px; }
     #about { padding-top: 8px; }
     #about .about-text { line-height: 1.65; }
+    .research-loop {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 12px; margin-top: 28px;
+    }
+    .loop-step {
+      position: relative; min-height: 128px; padding: 18px;
+      background: var(--bg-card); border-radius: 14px;
+      box-shadow: var(--shadow-sm); border: 1px solid rgba(0,0,0,.04);
+    }
+    .loop-step:not(:last-child)::after {
+      content: '→'; position: absolute; z-index: 2;
+      right: -12px; top: 50%; transform: translate(50%, -50%);
+      width: 26px; height: 26px; display: grid; place-items: center;
+      border-radius: 50%; background: var(--text-primary);
+      color: var(--bg-card); font-size: 13px;
+    }
+    .loop-index { color: var(--accent-blue); font: 700 11px/1 var(--font-stack); letter-spacing: .08em; }
+    .loop-title { margin: 12px 0 5px; font-weight: 700; }
+    .loop-copy { color: var(--text-secondary); font-size: 13px; line-height: 1.45; }
+    .research-note {
+      margin-top: 16px; padding: 14px 16px; border-radius: 12px;
+      background: linear-gradient(120deg, rgba(0,102,204,.08), rgba(94,92,230,.08));
+      color: var(--text-secondary); font-size: 13px; line-height: 1.55;
+    }
 
     h2 {
       font-size: 26px; font-weight: 700;
@@ -144,7 +171,7 @@
 
     .news-item {
       display: grid;
-      grid-template-columns: 85px 1fr;
+      grid-template-columns: 85px minmax(0, 1fr);
       margin-bottom: 12px;
       font-size: 14px;
       padding-bottom: 12px;
@@ -194,17 +221,43 @@
       position: relative;
       border: 1px solid rgba(0,0,0,0.05);
     }
-    
+
     .paper-img img, .paper-img video {
       width: 100%; height: 100%;
       object-fit: cover; /* Change to 'contain' if you want zero crop, but 'cover' looks better */
     }
+    .paper-visual {
+      --vis-a: #0a2540; --vis-b: #0066cc; --vis-c: #0066cc;
+      width: 100%; height: 100%; padding: 18px;
+      display: flex; flex-direction: column; justify-content: space-between;
+      color: #fff; overflow: hidden; position: relative;
+      background: linear-gradient(135deg, var(--vis-a), var(--vis-b) 55%, var(--vis-c));
+    }
+    .paper-visual::after {
+      content: ''; position: absolute; width: 130px; height: 130px;
+      right: -42px; bottom: -55px; border: 1px solid rgba(255,255,255,.35);
+      border-radius: 50%; box-shadow: 0 0 0 18px rgba(255,255,255,.06), 0 0 0 36px rgba(255,255,255,.04);
+    }
+    .paper-visual.video-agent { --vis-a: #241b4b; --vis-b: #5e5ce6; --vis-c: #00a6a6; }
+    .paper-visual.creative-agent { --vis-a: #3a1c40; --vis-b: #b5179e; --vis-c: #f77f00; }
+    .paper-visual.quality-agent { --vis-a: #05403a; --vis-b: #0f8b6c; --vis-c: #7bd389; }
+
+    /* Low-level vision: one muted family so the section reads as a group */
+    .paper-visual.lowlevel { --vis-a: #16212e; --vis-b: #2b3d4f; --vis-c: #3d5566; }
+    .paper-visual.lowlevel::after { opacity: .55; }
+    .paper-visual.lowlevel.tint-teal { --vis-a: #0d2733; --vis-b: #1c4f5e; --vis-c: #2b6f75; }
+    .paper-visual.lowlevel.tint-indigo { --vis-a: #1a2138; --vis-b: #303f66; --vis-c: #445a86; }
+    .paper-visual.lowlevel.tint-violet { --vis-a: #221d33; --vis-b: #3d3560; --vis-c: #574b80; }
+    .paper-visual.lowlevel.tint-amber { --vis-a: #2b1d21; --vis-b: #57323a; --vis-c: #7d4a4a; }
+    .paper-visual.lowlevel.tint-green { --vis-a: #13291f; --vis-b: #244a36; --vis-c: #356449; }
+    .visual-label { font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; opacity: .75; }
+    .visual-title { max-width: 170px; font-size: 19px; font-weight: 750; line-height: 1.05; letter-spacing: -.025em; z-index: 1; }
 
     .paper-content { flex: 1; display: flex; flex-direction: column; justify-content: center; }
 
     .paper-title { font-size: 18px; font-weight: 600; margin-bottom: 6px; line-height: 1.35; color: #000; }
     .paper-authors { font-size: 14px; color: var(--text-secondary); margin-bottom: 10px; line-height: 1.5; }
-    
+
     .paper-venue {
       font-size: 12px; font-weight: 600; color: #000;
       background: #f2f2f7; padding: 4px 10px; border-radius: 6px;
@@ -222,86 +275,61 @@
     }
     .btn-pill:hover { background: #d1d1d6; color: #000; transform: scale(1.02); }
 
-    /* --- VISITOR MAP --- */
-    .visitor-map-card {
-      background: var(--bg-card);
-      border-radius: var(--radius);
-      padding: 24px;
-      box-shadow: var(--shadow-sm);
-      border: 1px solid rgba(0,0,0,0.02);
-    }
-    .visitor-map-inner {
-      min-height: 280px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: linear-gradient(180deg, #f8f9fa 0%, #f0f1f3 100%);
-      border-radius: 10px;
-      overflow: hidden;
-    }
-    .visitor-map-inner script + *,
-    .visitor-map-inner iframe { border: none; }
-    .visitor-map-note {
-      font-size: 11px;
-      color: var(--text-secondary);
-      opacity: 0.85;
-      margin-top: 12px;
-      margin-bottom: 0;
-    }
-
     /* --- EXPERIENCE TIMELINE --- */
     .exp-card {
       background: var(--bg-card);
       border-radius: var(--radius);
-      padding: 10px 20px 10px 32px;
+      padding: 24px 26px;
       box-shadow: var(--shadow-sm);
       border: 1px solid rgba(0,0,0,0.02);
     }
-    .exp-timeline { position: relative; }
-    .exp-timeline::before {
-      content: '';
-      position: absolute;
-      left: -18px;
-      top: 18px;
-      bottom: 18px;
-      width: 2px;
-      background: var(--accent-blue);
-      opacity: 0.35;
-      border-radius: 1px;
-    }
     .exp-item {
-      position: relative;
-      display: flex;
-      gap: 15px;
-      padding: 15px 0;
-      border-bottom: 1px solid #f0f0f0;
+      display: grid;
+      grid-template-columns: 76px minmax(0, 1fr);
+      gap: 16px;
     }
-    .exp-item:last-child { border-bottom: none; }
-    .exp-item::before {
+
+    /* left column: time scale */
+    .exp-when { text-align: right; padding-top: 13px; line-height: 1.35; }
+    .exp-start { font-size: 12.5px; font-weight: 650; font-variant-numeric: tabular-nums; }
+    .exp-end { font-size: 11px; color: var(--text-secondary); font-variant-numeric: tabular-nums; }
+
+    /* axis line + node */
+    .exp-body {
+      position: relative;
+      padding: 12px 0 22px 24px;
+      border-left: 2px solid rgba(0,102,204,0.2);
+    }
+    .exp-item:last-child .exp-body { padding-bottom: 0; border-left-color: transparent; }
+    .exp-body::before {
       content: '';
-      position: absolute;
-      left: -24px;
-      top: 22px;
-      width: 10px;
-      height: 10px;
+      position: absolute; left: -6px; top: 17px;
+      width: 10px; height: 10px;
       border-radius: 50%;
-      background: var(--accent-blue);
+      background: var(--bg-card);
+      border: 2px solid var(--accent-blue);
       box-sizing: border-box;
     }
+    .exp-item.current .exp-body::before {
+      background: var(--accent-blue);
+      box-shadow: 0 0 0 4px rgba(0,102,204,0.15);
+    }
+
+    .exp-body { min-width: 0; }
+    .exp-head { display: flex; align-items: flex-start; gap: 12px; }
+    .exp-head > div { min-width: 0; }
     .exp-logo {
-      width: 45px;
-      height: 45px;
+      width: 36px;
+      height: 36px;
       flex-shrink: 0;
       background: #fff;
-      padding: 5px;
+      padding: 4px;
       border-radius: 8px;
       border: 1px solid #eee;
     }
     .exp-logo img { width: 100%; height: 100%; object-fit: contain; }
-    .exp-body { flex: 1; }
-    .exp-title { font-weight: 600; }
-    .exp-desc { font-size: 14px; color: var(--text-secondary); }
-    .exp-date { font-size: 12px; color: #999; }
+    .exp-title { font-size: 15px; font-weight: 650; line-height: 1.3; }
+    .exp-desc { font-size: 13.5px; color: var(--text-secondary); line-height: 1.5; margin-top: 2px; }
 
     /* --- FOOTER --- */
     .site-footer {
@@ -332,21 +360,48 @@
       .social-btn:hover { background: #e5e5e7; color: #1d1d1f; }
       .paper-venue { background: #3a3a3c; color: var(--text-primary); }
       .paper-venue.highlight { background: rgba(94,184,255,0.15); color: var(--accent-blue); }
-      .visitor-map-inner { background: linear-gradient(180deg, #2d2d2f 0%, #252527 100%); }
-      .exp-logo { background: #38383a; border-color: #48484a; }
+      .exp-item { border-color: rgba(255,255,255,.06); }
       .topic-title { border-bottom-color: #404040; color: var(--text-secondary); }
       #awards ul { color: var(--text-primary); }
+      .loop-step { border-color: rgba(255,255,255,.06); }
+      .research-note { background: linear-gradient(120deg, rgba(94,184,255,.1), rgba(175,82,222,.1)); }
     }
 
     /* --- RESPONSIVE --- */
     @media (max-width: 800px) {
-      .container { grid-template-columns: 1fr; padding: 20px; gap: 30px; }
+      .container { grid-template-columns: minmax(0, 1fr); padding: 20px; gap: 30px; }
       .sidebar { position: static; margin-bottom: 20px; }
       .paper-card { flex-direction: column; gap: 15px; }
       .paper-img { width: 100%; height: auto; aspect-ratio: 16/9; }
-      .nav-menu { display: none; }
-      .exp-card { padding-left: 20px; }
-      .exp-timeline::before, .exp-item::before { display: none; }
+      .nav-menu {
+        display: flex; gap: 6px; margin-top: 22px;
+        overflow-x: auto; scrollbar-width: none;
+        padding-bottom: 2px; scroll-snap-type: x proximity;
+      }
+      .nav-menu::-webkit-scrollbar { display: none; }
+      .nav-menu li { flex: 0 0 auto; scroll-snap-align: start; }
+      .nav-link {
+        padding: 7px 10px; border-left: 0;
+        border-bottom: 2px solid transparent; white-space: nowrap;
+      }
+      .nav-link.active { padding-left: 10px; border-left: 0; border-bottom-color: var(--accent-blue); }
+      .exp-card { padding: 20px; }
+      .exp-item {
+        grid-template-columns: 1fr;
+        gap: 4px;
+        padding-bottom: 16px;
+        margin-bottom: 16px;
+        border-bottom: 1px solid rgba(128,128,128,0.15);
+      }
+      .exp-item:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+      .exp-when { display: flex; gap: 6px; text-align: left; padding-top: 0; }
+      .exp-body, .exp-item:last-child .exp-body { padding: 0; border-left: 0; }
+      .exp-body::before { display: none; }
+      .research-loop { grid-template-columns: 1fr; }
+      .loop-step { min-height: auto; }
+      .loop-step:not(:last-child)::after {
+        content: '↓'; right: 50%; top: auto; bottom: -12px; transform: translate(50%, 50%);
+      }
     }
   </style>
 </head>
@@ -354,55 +409,72 @@
 <body>
 
   <div class="container">
-    
+
     <!-- LEFT SIDEBAR -->
     <aside class="sidebar">
       <div class="profile-card">
         <img src="images/misc/mainfig.jpg" alt="Xuanhua He" class="avatar">
         <h1 class="name">Xuanhua He（何炫华）</h1>
-        <div class="role">Ph.D. Student @ HKUST</div>
-        
+        <div class="role">Agentic World Models · HKUST</div>
+
         <div class="social-links">
-          <a href="mailto:hexuanhua@mail.ustc.edu.cn" class="social-btn"><i class="fa-solid fa-envelope"></i></a>
-          <a href="https://scholar.google.com/citations?user=-bDAN2YAAAAJ" target="_blank" class="social-btn"><i class="fa-solid fa-graduation-cap"></i></a>
-          <a href="https://github.com/alexhe101" target="_blank" class="social-btn"><i class="fa-brands fa-github"></i></a>
+          <a href="mailto:hexuanhua@mail.ustc.edu.cn" class="social-btn" aria-label="Email Xuanhua"><i class="fa-solid fa-envelope"></i></a>
+          <a href="https://scholar.google.com/citations?user=-bDAN2YAAAAJ" target="_blank" rel="noopener" class="social-btn" aria-label="Google Scholar"><i class="fa-solid fa-graduation-cap"></i></a>
+          <a href="https://github.com/alexhe101" target="_blank" rel="noopener" class="social-btn" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
         </div>
 
         <ul class="nav-menu">
           <li><a href="#about" class="nav-link active">About</a></li>
           <li><a href="#news" class="nav-link">News</a></li>
-          <li><a href="#publications" class="nav-link">Publications</a></li>
           <li><a href="#experience" class="nav-link">Experience</a></li>
+          <li><a href="#publications" class="nav-link">Publications</a></li>
           <li><a href="#awards" class="nav-link">Awards</a></li>
-          <li><a href="#visitor-map" class="nav-link">Visitor Map</a></li>
         </ul>
       </div>
     </aside>
 
     <!-- RIGHT CONTENT -->
     <main>
-      
+
       <!-- ABOUT -->
       <section id="about">
         <h2>About Me</h2>
         <div class="about-text">
         <p>
-          I am currently a Ph.D. student in Computer Science and Engineering at 
+          I am currently a Ph.D. student in Computer Science and Engineering at
           <a href="https://www.hkust.edu.hk/" target="_blank" rel="noopener">HKUST</a>,
           advised by <a href="https://cqf.io" target="_blank" rel="noopener">Prof. Qifeng Chen</a>.
-          Previously, I obtained my M.S. from 
+          Previously, I obtained my M.S. from
           <a href="https://en.ustc.edu.cn/" target="_blank" rel="noopener">USTC</a>,
           working with Prof. Jie Zhang and <a href="https://auto.ustc.edu.cn/2021/0510/c25977a484824/page.htm" target="_blank" rel="noopener">Chengjun Xie</a>.
-          I received my B.Eng. degree from <a href="https://en.xmu.edu.cn/main.htm" target="_blank" rel="noopener">Xiamen University</a> in 2022, 
-          where I conducted research at the <a href="http://mocom.xmu.edu.cn/" target="_blank" rel="noopener">MOCOM Lab</a> under the guidance of 
+          I received my B.Eng. degree from <a href="https://en.xmu.edu.cn/main.htm" target="_blank" rel="noopener">Xiamen University</a> in 2022,
+          where I conducted research at the <a href="http://mocom.xmu.edu.cn/" target="_blank" rel="noopener">MOCOM Lab</a> under the guidance of
           <a href="http://mocom.xmu.edu.cn/static/lai-ch" target="_blank" rel="noopener">Prof. Yongxuan Lai</a>.
         </p>
         <p>
-          My research passion lies in <b>Generative AI</b>. 
-          Specifically, I focus on building controllable and physics-consistent <b>World Models</b> for video generation. 
-          I also have extensive experience in <b>low-level vision</b> tasks such as image restoration.
+          My research sits at the intersection of <b>agentic world models</b>, <b>video intelligence</b>, and
+          <b>self-improving agents</b>. I am interested in systems that perceive dynamic worlds, take purposeful
+          actions, verify their outcomes, and turn experience into better future behavior.
         </p>
         </div>
+        <div class="research-loop" aria-label="Research agenda">
+          <div class="loop-step">
+            <div class="loop-index">01 · MODEL</div>
+            <div class="loop-title">Understand the world</div>
+            <div class="loop-copy">Learn temporal, spatial, and physical structure from open-world video.</div>
+          </div>
+          <div class="loop-step">
+            <div class="loop-index">02 · ACT</div>
+            <div class="loop-title">Reason with tools</div>
+            <div class="loop-copy">Ground decisions through search, interaction, and closed-loop feedback.</div>
+          </div>
+          <div class="loop-step">
+            <div class="loop-index">03 · EVOLVE</div>
+            <div class="loop-title">Improve from experience</div>
+            <div class="loop-copy">Use verification and self-distillation to make long-horizon agents stronger.</div>
+          </div>
+        </div>
+        <p class="research-note"><b>Current question:</b> Can a world model become the environment, memory, and verifier an agent needs to recursively improve?</p>
       </section>
 
       <!-- NEWS (Scrollable) -->
@@ -411,39 +483,43 @@
         <div class="news-card">
           <div class="news-scroll-area">
             <div class="news-item">
+              <span class="news-date">Aug 2026</span>
+              <span>Two papers accepted to <b>EMNLP 2026</b> on self-evolving search agents and video deep research.</span>
+            </div>
+            <div class="news-item">
               <span class="news-date">Jun 2026</span>
-              <span>one paper accepted to <b style="color:#000;">ECCV 2026</b>.</span>
+              <span>One paper accepted to <b>ECCV 2026</b>.</span>
             </div>
 
             <div class="news-item">
               <span class="news-date">Apr 2026</span>
-              <span>one paper accepted to <b style="color:#000;">ICML 2026</b>.</span>
+              <span>One paper accepted to <b>ICML 2026</b>.</span>
             </div>
 
-            
+
             <div class="news-item">
               <span class="news-date">Feb 2026</span>
-              <span>two papers accepted to <b style="color:#000;">CVPR 2026</b>.</span>
+              <span>Two papers accepted to <b>CVPR 2026</b>.</span>
             </div>
 
             <div class="news-item">
               <span class="news-date">Jan 2026</span>
-              <span>One paper accepted to <b style="color:#000;">ICLR 2026</b>.</span>
+              <span>One paper accepted to <b>ICLR 2026</b>.</span>
             </div>
 
             <div class="news-item">
               <span class="news-date">Nov 2025</span>
-              <span>Four papers accepted to <b style="color:#000;">AAAI 2026</b>.</span>
+              <span>Four papers accepted to <b>AAAI 2026</b>.</span>
             </div>
 
             <div class="news-item">
               <span class="news-date">Sep 2025</span>
-              <span>Started my Ph.D. journey at <b style="color:#000;">HKUST</b>.</span>
+              <span>Started my Ph.D. journey at <b>HKUST</b>.</span>
             </div>
 
             <div class="news-item">
               <span class="news-date">Sep 2025</span>
-              <span>Joined <b style="color:#000;">Meituan</b> as a Research Intern.</span>
+              <span>Joined <b>Meituan</b> as a Research Intern.</span>
             </div>
 
             <div class="news-item">
@@ -456,16 +532,16 @@
               <span class="news-date">Feb 2025</span>
               <span>Joined <b>Kuaishou Kling AI</b> as a Research Intern.</span>
             </div>
-            
+
             <div class="news-item">
               <span class="news-date">Feb 2025</span>
-              <span>GameGen-X accepted to <b style="color:#000;">ICLR 2025</b>!</span>
+              <span>GameGen-X accepted to <b>ICLR 2025</b>!</span>
             </div>
-            
+
             <!-- 2024 -->
             <div class="news-item">
               <span class="news-date">Oct 2024</span>
-              <span>Released <b style="color:#000;">GameGen-X</b>, an interactive open-world game video generation model.</span>
+              <span>Released <b>GameGen-X</b>, an interactive open-world game video generation model.</span>
             </div>
 
             <div class="news-item">
@@ -475,7 +551,7 @@
 
             <div class="news-item">
               <span class="news-date">May 2024</span>
-              <span>Released <b style="color:#000;">ID-Animator</b>, a zero-shot identity-preserving video generation model.</span>
+              <span>Released <b>ID-Animator</b>, a zero-shot identity-preserving video generation model.</span>
             </div>
 
             <div class="news-item">
@@ -492,15 +568,171 @@
         </div>
       </section>
 
+      <!-- EXPERIENCE -->
+      <section id="experience">
+        <h2>Experience</h2>
+        <div class="exp-card">
+          <div class="exp-item current">
+            <div class="exp-when">
+              <div class="exp-start">Sep 2025</div>
+              <div class="exp-end">Present</div>
+            </div>
+            <div class="exp-body">
+              <div class="exp-head">
+                <div class="exp-logo"><img src="images/misc/meituan.png" alt="Meituan"></div>
+                <div>
+                  <div class="exp-title">LongCat Avatar Team, Meituan</div>
+                  <div class="exp-desc">Research Intern, Talented Plan · Video Avatar and World Model · Mentor: <a href="https://yzhang2016.github.io/" target="_blank" rel="noopener">Yong Zhang</a></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="exp-item">
+            <div class="exp-when">
+              <div class="exp-start">Feb 2025</div>
+              <div class="exp-end">Aug 2025</div>
+            </div>
+            <div class="exp-body">
+              <div class="exp-head">
+                <div class="exp-logo"><img src="images/misc/kuaishou.jpg" alt="Kuaishou"></div>
+                <div>
+                  <div class="exp-title">Kling AI Team, Kuaishou</div>
+                  <div class="exp-desc">Research Intern · Video Editing · Mentor: <a href="https://liuquande.github.io/" target="_blank" rel="noopener">Quande Liu</a></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="exp-item">
+            <div class="exp-when">
+              <div class="exp-start">Apr 2024</div>
+              <div class="exp-end">Oct 2024</div>
+            </div>
+            <div class="exp-body">
+              <div class="exp-head">
+                <div class="exp-logo"><img src="images/misc/Tencent.jpg" alt="Tencent"></div>
+                <div>
+                  <div class="exp-title">LightSpeed, Tencent</div>
+                  <div class="exp-desc">Research Intern · Interactive Video Generation · Mentor: <a href="https://liuquande.github.io/" target="_blank" rel="noopener">Quande Liu</a></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="exp-item">
+            <div class="exp-when">
+              <div class="exp-start">Nov 2023</div>
+              <div class="exp-end">Mar 2024</div>
+            </div>
+            <div class="exp-body">
+              <div class="exp-head">
+                <div class="exp-logo"><img src="images/misc/baidu.png" alt="Baidu"></div>
+                <div>
+                  <div class="exp-title">Baidu</div>
+                  <div class="exp-desc">CV Engineer Intern · Video Generation</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="exp-item">
+            <div class="exp-when">
+              <div class="exp-start">Jun 2023</div>
+              <div class="exp-end">Nov 2023</div>
+            </div>
+            <div class="exp-body">
+              <div class="exp-head">
+                <div class="exp-logo"><img src="images/misc/horizon.jpg" alt="Horizon Robotics"></div>
+                <div>
+                  <div class="exp-title">Horizon Robotics</div>
+                  <div class="exp-desc">Research Intern · Low-level Vision · Mentor: <a href="https://scholar.google.com/citations?user=z-25fk0AAAAJ&amp;hl=en" target="_blank" rel="noopener">Guoli Wang</a></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <!-- PUBLICATIONS (Split Categories & Landscape Images) -->
       <section id="publications">
         <h2>Selected Publications</h2>
-        
-        <!-- Topic 1 -->
-        <div class="topic-title">Video Generation & World Models</div>
+
+        <div class="topic-title">Self-Improving &amp; Multimodal Agents</div>
         <article class="paper-card">
           <div class="paper-img">
-            <video src="https://github.com/xuanhuahe/ICDepth/blob/main/static/videos/ICDepth_promo.mp4" muted autoplay loop playsinline></video>
+            <div class="paper-visual">
+              <span class="visual-label">Verify · Reflect · Evolve</span>
+              <span class="visual-title">DeepSearch World</span>
+            </div>
+          </div>
+          <div class="paper-content">
+            <div class="paper-title">DeepSearch-World: Self-Distillation for Deep Search Agents in a Verifiable Environment</div>
+            <div class="paper-authors">Xinyu Geng, <b>Xuanhua He*(Co-First Author)</b>, Sixiang Chen, Yanjing Xiao, Fan Zhang, Shijue Huang, Haitao Mi, Zhenwen Liang, Tianqing Fang, Yi R. Fung</div>
+            <div><span class="paper-venue highlight">EMNLP 2026</span></div>
+            <div class="btn-row">
+              <a href="https://arxiv.org/abs/2607.07820" target="_blank" rel="noopener" class="btn-pill"><i class="fa-regular fa-file-pdf"></i> Paper</a>
+              <a href="https://github.com/ornamentt/DeepSearch-World" target="_blank" rel="noopener" class="btn-pill"><i class="fa-brands fa-github"></i> Code &amp; Env</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="paper-card">
+          <div class="paper-img">
+            <div class="paper-visual video-agent">
+              <span class="visual-label">Ground · Search · Reason</span>
+              <span class="visual-title">Video Searcher</span>
+            </div>
+          </div>
+          <div class="paper-content">
+            <div class="paper-title">VideoSearcher: Empowering Video Deep Research with Multi-Tool Agentic Reasoning via Reinforcement Learning</div>
+            <div class="paper-authors">Zhenkun Gao*, Yicheng Bao*, Jinlong Peng*, Xueheng Li*, Suyuan Huang*, Bangwei Liu, Kunquan Li, Zhenye Gan, Tao Hu, Chengjun Xie, <b>Xuanhua He✉</b>, Zhizhong Zhang, Xin Tan, Chengjie Wang, Yuan Xie</div>
+            <div><span class="paper-venue highlight">EMNLP 2026</span></div>
+            <div class="btn-row">
+              <a href="https://stephen-gzk.github.io/VideoSearcher-website/" target="_blank" rel="noopener" class="btn-pill"><i class="fa-solid fa-globe"></i> Project</a>
+              <a href="https://arxiv.org/abs/2607.02927" target="_blank" rel="noopener" class="btn-pill"><i class="fa-regular fa-file-pdf"></i> Paper</a>
+              <a href="https://github.com/Stephen-gzk/VideoSearcher" target="_blank" rel="noopener" class="btn-pill"><i class="fa-brands fa-github"></i> Code</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="paper-card">
+          <div class="paper-img">
+            <div class="paper-visual creative-agent">
+              <span class="visual-label">Canvas · Memory · Action</span>
+              <span class="visual-title">Jarvis Hub</span>
+            </div>
+          </div>
+          <div class="paper-content">
+            <div class="paper-title">JarvisHub: An Open Harness for Canvas-Native Multimodal Creative Agents</div>
+            <div class="paper-authors">Yunlong Lin, Zixu Lin, Zhaohu Xing, Biqiang Li, Chenxin Li, Haonan Wang, ..., <b>Xuanhua He</b>, ..., Tianyu Pang, Xiangyu Yue</div>
+            <div><span class="paper-venue">ArXiv 2026</span></div>
+            <div class="btn-row">
+              <a href="https://www.jarvishub.site/" target="_blank" rel="noopener" class="btn-pill"><i class="fa-solid fa-globe"></i> Project</a>
+              <a href="https://arxiv.org/abs/2607.23588" target="_blank" rel="noopener" class="btn-pill"><i class="fa-regular fa-file-pdf"></i> Paper</a>
+              <a href="https://github.com/LYL1015/JarvisHub" target="_blank" rel="noopener" class="btn-pill"><i class="fa-brands fa-github"></i> Code</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="paper-card">
+          <div class="paper-img">
+            <div class="paper-visual quality-agent">
+              <span class="visual-label">Probe · Zoom · Judge</span>
+              <span class="visual-title">Q-Probe</span>
+            </div>
+          </div>
+          <div class="paper-content">
+            <div class="paper-title">Q-Probe: Scaling Image Quality Assessment to High Resolution via Context-Aware Agentic Probing</div>
+            <div class="paper-authors">Xiang Li, Xueheng Li, Yu Wang, <b>Xuanhua He✉(Corresponding Author)</b>, Zhangchi Hu, Weiwei Yu, Chengjun Xie</div>
+            <div><span class="paper-venue">ArXiv 2026</span></div>
+            <div class="btn-row">
+              <a href="https://arxiv.org/abs/2601.15356" target="_blank" rel="noopener" class="btn-pill"><i class="fa-regular fa-file-pdf"></i> Paper</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Topic 1 -->
+        <div class="topic-title">Interactive Video &amp; World Models</div>
+        <article class="paper-card">
+          <div class="paper-img">
+            <video src="https://raw.githubusercontent.com/xuanhuahe/ICDepth/main/static/videos/ICDepth_promo.mp4" muted autoplay loop playsinline preload="metadata"></video>
           </div>
           <div class="paper-content">
             <div class="paper-title">ICDepth: Taming Video Diffusion Models for Video Depth Estimation via In-Context Conditioning
@@ -515,12 +747,11 @@
           </div>
         </article>
 
-      
-        
+
+
         <article class="paper-card">
           <div class="paper-img">
-            <img src="https://github.com/MeiGen-AI/Infinite-World/blob/main/assets/title.png?raw=true" alt="ORCA"></img>
-            <a href="https://www.youtube.com/watch?v=4ZJrXpAMNbU">
+            <img src="https://raw.githubusercontent.com/MeiGen-AI/Infinite-World/main/assets/title.png" alt="Infinite-World teaser">
           </div>
           <div class="paper-content">
             <div class="paper-title">Infinite-World: Scaling Interactive World Models to 1000-Frame Horizons via Pose-Free Hierarchical Memory
@@ -535,10 +766,10 @@
           </div>
         </article>
 
-        
+
         <article class="paper-card">
           <div class="paper-img">
-            <img src="https://xuanhuahe.github.io/ORCA/assets/main_large.png" alt="ORCA"></img>
+            <img src="https://xuanhuahe.github.io/ORCA/assets/main_large.png" alt="ORCA teaser">
           </div>
           <div class="paper-content">
             <div class="paper-title">Active Intelligence in Video Avatars via Closed-loop World Modeling
@@ -555,7 +786,7 @@
 
         <article class="paper-card">
           <div class="paper-img">
-            <img src="https://yychen233.github.io/ContextFlow-page/static/images/teaser.png" alt="ContextFlow"></img>
+            <img src="https://yychen233.github.io/ContextFlow-page/static/images/teaser.png" alt="ContextFlow teaser">
           </div>
           <div class="paper-content">
             <div class="paper-title">ContextFlow: Training-Free Video Object Editing via Adaptive Context Enrichment
@@ -571,7 +802,7 @@
         </article>
         <article class="paper-card">
           <div class="paper-img">
-            <img src="https://fulldit2.github.io/figs/mainfig_0516_v2.png" alt="ContextFlow"></img>
+            <img src="https://fulldit2.github.io/figs/mainfig_0516_v2.png" alt="FullDiT2 teaser">
           </div>
           <div class="paper-content">
             <div class="paper-title">FullDiT2: Efficient In-Context Conditioning for Video Diffusion Transformers
@@ -641,7 +872,10 @@
 
         <article class="paper-card">
           <div class="paper-img">
-            <img src="images/publications/panscale.png" alt="ScaleFormer">
+            <div class="paper-visual lowlevel tint-teal">
+              <span class="visual-label">Cross-Scale · Benchmark</span>
+              <span class="visual-title">ScaleFormer</span>
+            </div>
           </div>
           <div class="paper-content">
             <div class="paper-title">Cross-Scale Pansharpening via ScaleFormer and the PanScale Benchmark</div>
@@ -657,14 +891,17 @@
 
         <article class="paper-card">
           <div class="paper-img">
-            <img src="images/publications/iccv.png" alt="FAME-Net">
+            <div class="paper-visual lowlevel tint-indigo">
+              <span class="visual-label">Pyramid · Frequency</span>
+              <span class="visual-title">Dual Domain Injection</span>
+            </div>
           </div>
           <div class="paper-content">
             <div class="paper-title">Pyramid Dual Domain Injection Network for Pan-sharpening</div>
             <div class="paper-authors"><b>Xuanhua He</b>, Keyu Yan, Rui Li, Chengjun Xie, Jie Zhang, Man Zhou</div>
             <div><span class="paper-venue highlight">ICCV 2023</span></div>
             <div class="btn-row">
-              <a href="#" class="btn-pill"><i class="fa-regular fa-file-pdf"></i> Paper</a>
+              <a href="https://openaccess.thecvf.com/content/ICCV2023/html/He_Pyramid_Dual_Domain_Injection_Network_for_Pan-sharpening_ICCV_2023_paper.html" target="_blank" rel="noopener" class="btn-pill"><i class="fa-regular fa-file-pdf"></i> Paper</a>
               <a href="https://github.com/alexhe101/FAME-Net" class="btn-pill"><i class="fa-brands fa-github"></i> Code</a>
             </div>
           </div>
@@ -673,7 +910,10 @@
         <!-- Paper 3 -->
         <article class="paper-card">
           <div class="paper-img">
-            <img src="images/publications/AAAI.png" alt="FAME-Net">
+            <div class="paper-visual lowlevel tint-violet">
+              <span class="visual-label">Frequency MoE</span>
+              <span class="visual-title">FAME-Net</span>
+            </div>
           </div>
           <div class="paper-content">
             <div class="paper-title">Frequency-adaptive Pan-sharpening with Mixture-of-Experts</div>
@@ -689,7 +929,10 @@
         <!-- Paper 4 -->
         <article class="paper-card">
           <div class="paper-img">
-            <img src="images/publications/AAAI.png" alt="FourierISP">
+            <div class="paper-visual lowlevel tint-amber">
+              <span class="visual-label">RAW → sRGB</span>
+              <span class="visual-title">FourierISP</span>
+            </div>
           </div>
           <div class="paper-content">
             <div class="paper-title">Enhancing RAW-to-sRGB with Decoupled Style Structure in Fourier Domain</div>
@@ -703,7 +946,10 @@
         </article>
         <article class="paper-card">
           <div class="paper-img">
-            <img src="images/publications/tcsvt.png" alt="tcsvt">
+            <div class="paper-visual lowlevel tint-green">
+              <span class="visual-label">Distilled Fusion</span>
+              <span class="visual-title">DTPF</span>
+            </div>
           </div>
           <div class="paper-content">
             <div class="paper-title">Distilling Textual Priors from LLM to Efficient Image Fusion
@@ -720,110 +966,52 @@
 
       </section>
 
-      <!-- EXPERIENCE -->
-      <section id="experience">
-        <h2>Experience</h2>
-        <div class="exp-card">
-          <div class="exp-timeline">
-            <div class="exp-item">
-              <div class="exp-logo"><img src="images/misc/meituan.png" alt="Meituan"></div>
-              <div class="exp-body">
-                <div class="exp-title">Meigen, Meituan</div>
-                <div class="exp-desc">Research Intern · Topic: Video Avatar and World Model · Mentor: <a href="https://yzhang2016.github.io/" target="_blank" rel="noopener">Yong Zhang</a></div>
-                <div class="exp-date">Sep 2025 - Present</div>
-              </div>
-            </div>
-            <div class="exp-item">
-              <div class="exp-logo"><img src="images/misc/kuaishou.jpg" alt="Kuaishou"></div>
-              <div class="exp-body">
-                <div class="exp-title">Kling AI Team, Kuaishou</div>
-                <div class="exp-desc">Research Intern · Topic: Video Editing · Mentor: <a href="https://liuquande.github.io/" target="_blank" rel="noopener">Quande Liu</a></div>
-                <div class="exp-date">Feb 2025 - Aug 2025</div>
-              </div>
-            </div>
-            <div class="exp-item">
-              <div class="exp-logo"><img src="images/misc/Tencent.jpg" alt="Tencent"></div>
-              <div class="exp-body">
-                <div class="exp-title">LightSpeed, Tencent Inc</div>
-                <div class="exp-desc">Research Intern · Topic: Intercative Video Generation · Mentor: <a href="https://liuquande.github.io/" target="_blank" rel="noopener">Quande Liu</a></div>
-                <div class="exp-date">Apr 2024 - Oct 2024</div>
-              </div>
-            </div>
-            <div class="exp-item">
-              <div class="exp-logo"><img src="images/misc/baidu.png" alt="Baidu"></div>
-              <div class="exp-body">
-                <div class="exp-title">Baidu Inc</div>
-                <div class="exp-desc">CV Engineer Intern · Topic: Video Generation</div>
-                <div class="exp-date">Nov 2023 - Mar 2024</div>
-              </div>
-            </div>
-            <div class="exp-item">
-              <div class="exp-logo"><img src="images/misc/horizon.jpg" alt="Horizon"></div>
-              <div class="exp-body">
-                <div class="exp-title">Horizon Robotics</div>
-                <div class="exp-desc">Research Intern · Topic: Low-level Vision · Mentor: <a href="https://scholar.google.com/citations?user=z-25fk0AAAAJ&hl=en" target="_blank" rel="noopener">Guoli Wang</a>.</div>
-                <div class="exp-date">Jun 2023 - Nov 2023</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       <!-- AWARDS -->
       <section id="awards">
         <h2>Awards</h2>
-        <ul style="padding-left: 20px; font-size: 15px; color: #333; line-height: 1.8;">
+        <ul class="awards-list">
           <li><b>Outstanding Graduate</b>, USTC (2025)</li>
           <li><b>National Scholarship</b>, USTC (2023, 2024)</li>
           <li><b>Yuequn Scholarship for Academic Excellence</b>, USTC (2023)</li>
         </ul>
       </section>
 
-      <!-- VISITOR MAP -->
-      <section id="visitor-map">
-        <h2>Visitor Map</h2>
-        <p style="font-size: 14px; color: var(--text-secondary); margin-bottom: 16px;">
-          Where visitors are from
-        </p>
-        <div class="visitor-map-card">
-          <div class="visitor-map-inner">
-            <script type="text/javascript" id="clustrmaps" src="//clustrmaps.com/map_v2.js?d=79Fjttq5hQDHFJxRgjP-UyRG2NTTAL0m3mmimF71s5w&cl=ffffff&w=a"></script>
-          </div>
-          <p class="visitor-map-note">Get your own free widget at <a href="https://www.revolvermaps.com/" target="_blank" rel="noopener">RevolverMaps.com</a> or <a href="https://clustrmaps.com/" target="_blank" rel="noopener">ClustrMaps.com</a> and replace the embed above to show real visitor data.</p>
-        </div>
-      </section>
-
       <footer class="site-footer">
-        © 2025 Xuanhua He.
+        © <span id="current-year">2026</span> Xuanhua He. Building worlds where agents can learn.
       </footer>
 
     </main>
   </div>
 
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script>
-    $(document).ready(function(){
-      // Smooth Scroll
-      $('a.nav-link').on('click', function(event) {
-        if (this.hash !== "") {
-          event.preventDefault();
-          var hash = this.hash;
-          $('html, body').animate({ scrollTop: $(hash).offset().top - 60 }, 500);
-        }
-      });
-      
-      // Scroll Spy
-      $(window).on('scroll', function() {
-        var scrollPos = $(window).scrollTop() + 100;
-        $('section').each(function() {
-          var currLink = $('a.nav-link[href="#' + $(this).attr('id') + '"]');
-          if ($(this).position().top <= scrollPos && $(this).position().top + $(this).height() > scrollPos) {
-            $('.nav-link').removeClass("active");
-            currLink.addClass("active");
-          }
-        });
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+
+    const navLinks = [...document.querySelectorAll('.nav-link')];
+    navLinks.forEach(link => {
+      link.addEventListener('click', event => {
+        const target = document.querySelector(link.hash);
+        if (!target) return;
+        event.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
       });
     });
+
+    const observer = new IntersectionObserver(entries => {
+      const visible = entries
+        .filter(entry => entry.isIntersecting)
+        .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+      if (!visible) return;
+
+      navLinks.forEach(link => {
+        const isActive = link.hash === `#${visible.target.id}`;
+        link.classList.toggle('active', isActive);
+        if (isActive && window.innerWidth <= 800) {
+          link.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+        }
+      });
+    }, { rootMargin: '-15% 0px -65% 0px', threshold: [0, 0.1, 0.25] });
+
+    document.querySelectorAll('main section[id]').forEach(section => observer.observe(section));
   </script>
 </body>
 

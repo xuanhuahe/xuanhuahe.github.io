@@ -986,32 +986,83 @@
   <script>
     document.getElementById('current-year').textContent = new Date().getFullYear();
 
+    const navMenu = document.querySelector('.nav-menu');
     const navLinks = [...document.querySelectorAll('.nav-link')];
+    const sections = [...document.querySelectorAll('main section[id]')]
+      .filter(section => navLinks.some(link => link.hash === `#${section.id}`));
+
+    const smooth = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
+    const OFFSET = 120;
+
+    let activeSection = null;
+    let clickLockUntil = 0;
+
+    // Only the nav strip may move here. scrollIntoView() would also scroll the
+    // document, which hijacks the smooth scroll started by a nav click.
+    function revealInNav(link) {
+      if (navMenu.scrollWidth <= navMenu.clientWidth) return;
+      navMenu.scrollTo({
+        left: link.offsetLeft - (navMenu.clientWidth - link.offsetWidth) / 2,
+        behavior: smooth
+      });
+    }
+
+    function setActive(section) {
+      if (!section || section === activeSection) return;
+      activeSection = section;
+      navLinks.forEach(link => {
+        const isActive = link.hash === `#${section.id}`;
+        link.classList.toggle('active', isActive);
+        if (isActive) revealInNav(link);
+      });
+    }
+
+    // The last section whose top has passed the reference line wins. Comparing
+    // intersection ratios instead would favour short sections over long ones.
+    function currentSection() {
+      const scrollBottom = window.scrollY + window.innerHeight;
+      if (scrollBottom >= document.documentElement.scrollHeight - 2) {
+        return sections[sections.length - 1];
+      }
+      let current = sections[0];
+      sections.forEach(section => {
+        if (section.getBoundingClientRect().top <= OFFSET) current = section;
+      });
+      return current;
+    }
+
+    let ticking = false;
+    function onScroll() {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        ticking = false;
+        if (Date.now() < clickLockUntil) return;
+        setActive(currentSection());
+      });
+    }
+
     navLinks.forEach(link => {
       link.addEventListener('click', event => {
-        const target = document.querySelector(link.hash);
+        const target = document.getElementById(link.hash.slice(1));
         if (!target) return;
         event.preventDefault();
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        // Hold the highlight on the clicked entry while the smooth scroll
+        // travels across the sections in between.
+        clickLockUntil = Date.now() + 1000;
+        setActive(target);
+        target.scrollIntoView({ behavior: smooth, block: 'start' });
+        history.replaceState(null, '', link.hash);
       });
     });
 
-    const observer = new IntersectionObserver(entries => {
-      const visible = entries
-        .filter(entry => entry.isIntersecting)
-        .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-      if (!visible) return;
+    ['wheel', 'touchstart', 'keydown'].forEach(type => {
+      window.addEventListener(type, () => { clickLockUntil = 0; }, { passive: true });
+    });
 
-      navLinks.forEach(link => {
-        const isActive = link.hash === `#${visible.target.id}`;
-        link.classList.toggle('active', isActive);
-        if (isActive && window.innerWidth <= 800) {
-          link.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-        }
-      });
-    }, { rootMargin: '-15% 0px -65% 0px', threshold: [0, 0.1, 0.25] });
-
-    document.querySelectorAll('main section[id]').forEach(section => observer.observe(section));
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    setActive(currentSection());
   </script>
 </body>
 

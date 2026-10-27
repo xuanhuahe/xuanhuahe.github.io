@@ -127,11 +127,6 @@
     .loop-index { color: var(--accent-blue); font: 700 11px/1 var(--font-stack); letter-spacing: .08em; }
     .loop-title { margin: 12px 0 5px; font-weight: 700; }
     .loop-copy { color: var(--text-secondary); font-size: 13px; line-height: 1.45; }
-    .research-note {
-      margin-top: 16px; padding: 14px 16px; border-radius: 12px;
-      background: linear-gradient(120deg, rgba(0,102,204,.08), rgba(94,92,230,.08));
-      color: var(--text-secondary); font-size: 13px; line-height: 1.55;
-    }
 
     h2 {
       font-size: 26px; font-weight: 700;
@@ -329,7 +324,6 @@
       border: 1px solid #eee;
     }
     .exp-logo img { width: 100%; height: 100%; object-fit: contain; }
-    .seed-logo { display: grid; place-items: center; color: #0066cc; font-size: 10px; font-weight: 750; letter-spacing: -.02em; }
     a:focus-visible { outline: 2px solid var(--accent-blue); outline-offset: 4px; }
     .exp-title { font-size: 15px; font-weight: 650; line-height: 1.3; }
     .exp-desc { font-size: 13.5px; color: var(--text-secondary); line-height: 1.5; margin-top: 2px; }
@@ -369,7 +363,6 @@
       .topic-title { border-bottom-color: #404040; color: var(--text-secondary); }
       #awards ul { color: var(--text-primary); }
       .loop-step { border-color: rgba(255,255,255,.06); }
-      .research-note { background: linear-gradient(120deg, rgba(94,184,255,.1), rgba(175,82,222,.1)); }
     }
 
     /* --- RESPONSIVE --- */
@@ -431,9 +424,9 @@
         <ul class="nav-menu">
           <li><a href="#about" class="nav-link active" aria-current="location">About</a></li>
           <li><a href="#news" class="nav-link">News</a></li>
-          <li><a href="#experience" class="nav-link">Experience</a></li>
           <li><a href="#publications" class="nav-link">Publications</a></li>
           <li><a href="#awards" class="nav-link">Awards</a></li>
+          <li><a href="#experience" class="nav-link">Experience</a></li>
         </ul>
       </div>
     </aside>
@@ -449,7 +442,7 @@
           I am currently a Ph.D. student in Computer Science and Engineering at
           <a href="https://www.hkust.edu.hk/" target="_blank" rel="noopener">HKUST</a>,
           advised by <a href="https://cqf.io" target="_blank" rel="noopener">Prof. Qifeng Chen</a>.
-          I am also currently with <b>ByteDance Seed</b>, working on multimodal agents and agentic world models.
+          I am also currently with <b>Seed, Bytedance</b>, working on multimodal agents and agentic world models.
           Previously, I obtained my M.S. from
           <a href="https://en.ustc.edu.cn/" target="_blank" rel="noopener">USTC</a>,
           working with Prof. Jie Zhang and <a href="https://auto.ustc.edu.cn/2021/0510/c25977a484824/page.htm" target="_blank" rel="noopener">Chengjun Xie</a>.
@@ -480,7 +473,6 @@
             <div class="loop-copy">Use verification and self-distillation to make long-horizon agents stronger.</div>
           </div>
         </div>
-        <p class="research-note"><b>Current question:</b> Can a world model become the environment, memory, and verifier an agent needs to recursively improve?</p>
       </section>
 
       <!-- NEWS (Scrollable) -->
@@ -574,103 +566,6 @@
               <span>Two paper accepted to AAAI 2024.</span>
             </div> -->
 
-          </div>
-        </div>
-      </section>
-
-      <!-- EXPERIENCE -->
-      <section id="experience">
-        <h2>Experience</h2>
-        <div class="exp-card">
-          <div class="exp-item current">
-            <div class="exp-when">
-              <div class="exp-start">Present</div>
-            </div>
-            <div class="exp-body">
-              <div class="exp-head">
-                <div class="exp-logo seed-logo" aria-hidden="true">Seed</div>
-                <div>
-                  <div class="exp-title">ByteDance Seed</div>
-                  <div class="exp-desc">Multimodal Agents &amp; Agentic World Models</div>
-                  <div class="exp-desc">Visual grounding, event planning, and action verification in interactive video worlds; model training and evaluation for feedback-driven agent improvement.</div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="exp-item">
-            <div class="exp-when">
-              <div class="exp-start">Sep 2025</div>
-              <div class="exp-end">Jul 2026</div>
-            </div>
-            <div class="exp-body">
-              <div class="exp-head">
-                <div class="exp-logo"><img loading="lazy" decoding="async" src="images/misc/meituan.png" alt="Meituan"></div>
-                <div>
-                  <div class="exp-title">LongCat Avatar Team, Meituan</div>
-                  <div class="exp-desc">Research Intern, Talented Plan · Video Avatar and World Model · Mentor: <a href="https://yzhang2016.github.io/" target="_blank" rel="noopener">Yong Zhang</a></div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="exp-item">
-            <div class="exp-when">
-              <div class="exp-start">Feb 2025</div>
-              <div class="exp-end">Aug 2025</div>
-            </div>
-            <div class="exp-body">
-              <div class="exp-head">
-                <div class="exp-logo"><img loading="lazy" decoding="async" src="images/misc/kuaishou.jpg" alt="Kuaishou"></div>
-                <div>
-                  <div class="exp-title">Kling AI Team, Kuaishou</div>
-                  <div class="exp-desc">Research Intern · Video Editing · Mentor: <a href="https://liuquande.github.io/" target="_blank" rel="noopener">Quande Liu</a></div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="exp-item">
-            <div class="exp-when">
-              <div class="exp-start">Apr 2024</div>
-              <div class="exp-end">Oct 2024</div>
-            </div>
-            <div class="exp-body">
-              <div class="exp-head">
-                <div class="exp-logo"><img loading="lazy" decoding="async" src="images/misc/Tencent.jpg" alt="Tencent"></div>
-                <div>
-                  <div class="exp-title">LightSpeed, Tencent</div>
-                  <div class="exp-desc">Research Intern · Interactive Video Generation · Mentor: <a href="https://liuquande.github.io/" target="_blank" rel="noopener">Quande Liu</a></div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="exp-item">
-            <div class="exp-when">
-              <div class="exp-start">Nov 2023</div>
-              <div class="exp-end">Mar 2024</div>
-            </div>
-            <div class="exp-body">
-              <div class="exp-head">
-                <div class="exp-logo"><img loading="lazy" decoding="async" src="images/misc/baidu.png" alt="Baidu"></div>
-                <div>
-                  <div class="exp-title">Baidu</div>
-                  <div class="exp-desc">CV Engineer Intern · Video Generation</div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="exp-item">
-            <div class="exp-when">
-              <div class="exp-start">Jun 2023</div>
-              <div class="exp-end">Nov 2023</div>
-            </div>
-            <div class="exp-body">
-              <div class="exp-head">
-                <div class="exp-logo"><img loading="lazy" decoding="async" src="images/misc/horizon.jpg" alt="Horizon Robotics"></div>
-                <div>
-                  <div class="exp-title">Horizon Robotics</div>
-                  <div class="exp-desc">Research Intern · Low-level Vision · Mentor: <a href="https://scholar.google.com/citations?user=z-25fk0AAAAJ&amp;hl=en" target="_blank" rel="noopener">Guoli Wang</a></div>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </section>
@@ -999,6 +894,103 @@
           <li><b>National Scholarship</b>, USTC (2023, 2024)</li>
           <li><b>Yuequn Scholarship for Academic Excellence</b>, USTC (2023)</li>
         </ul>
+      </section>
+
+      <!-- EXPERIENCE -->
+      <section id="experience">
+        <h2>Experience</h2>
+        <div class="exp-card">
+          <div class="exp-item current">
+            <div class="exp-when">
+              <div class="exp-start">Present</div>
+            </div>
+            <div class="exp-body">
+              <div class="exp-head">
+                <div class="exp-logo"><img loading="lazy" decoding="async" src="images/misc/seed.ico" alt="Seed team logo"></div>
+                <div>
+                  <div class="exp-title">Seed, Bytedance</div>
+                  <div class="exp-desc">Multimodal Agents &amp; Agentic World Models</div>
+                  <div class="exp-desc">Visual grounding, event planning, and action verification in interactive video worlds; model training and evaluation for feedback-driven agent improvement.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="exp-item">
+            <div class="exp-when">
+              <div class="exp-start">Sep 2025</div>
+              <div class="exp-end">Jul 2026</div>
+            </div>
+            <div class="exp-body">
+              <div class="exp-head">
+                <div class="exp-logo"><img loading="lazy" decoding="async" src="images/misc/meituan.png" alt="Meituan"></div>
+                <div>
+                  <div class="exp-title">LongCat Avatar Team, Meituan</div>
+                  <div class="exp-desc">Research Intern, Talented Plan · Video Avatar and World Model · Mentor: <a href="https://yzhang2016.github.io/" target="_blank" rel="noopener">Yong Zhang</a></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="exp-item">
+            <div class="exp-when">
+              <div class="exp-start">Feb 2025</div>
+              <div class="exp-end">Aug 2025</div>
+            </div>
+            <div class="exp-body">
+              <div class="exp-head">
+                <div class="exp-logo"><img loading="lazy" decoding="async" src="images/misc/kuaishou.jpg" alt="Kuaishou"></div>
+                <div>
+                  <div class="exp-title">Kling AI Team, Kuaishou</div>
+                  <div class="exp-desc">Research Intern · Video Editing · Mentor: <a href="https://liuquande.github.io/" target="_blank" rel="noopener">Quande Liu</a></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="exp-item">
+            <div class="exp-when">
+              <div class="exp-start">Apr 2024</div>
+              <div class="exp-end">Oct 2024</div>
+            </div>
+            <div class="exp-body">
+              <div class="exp-head">
+                <div class="exp-logo"><img loading="lazy" decoding="async" src="images/misc/Tencent.jpg" alt="Tencent"></div>
+                <div>
+                  <div class="exp-title">LightSpeed, Tencent</div>
+                  <div class="exp-desc">Research Intern · Interactive Video Generation · Mentor: <a href="https://liuquande.github.io/" target="_blank" rel="noopener">Quande Liu</a></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="exp-item">
+            <div class="exp-when">
+              <div class="exp-start">Nov 2023</div>
+              <div class="exp-end">Mar 2024</div>
+            </div>
+            <div class="exp-body">
+              <div class="exp-head">
+                <div class="exp-logo"><img loading="lazy" decoding="async" src="images/misc/baidu.png" alt="Baidu"></div>
+                <div>
+                  <div class="exp-title">Baidu</div>
+                  <div class="exp-desc">CV Engineer Intern · Video Generation</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="exp-item">
+            <div class="exp-when">
+              <div class="exp-start">Jun 2023</div>
+              <div class="exp-end">Nov 2023</div>
+            </div>
+            <div class="exp-body">
+              <div class="exp-head">
+                <div class="exp-logo"><img loading="lazy" decoding="async" src="images/misc/horizon.jpg" alt="Horizon Robotics"></div>
+                <div>
+                  <div class="exp-title">Horizon Robotics</div>
+                  <div class="exp-desc">Research Intern · Low-level Vision · Mentor: <a href="https://scholar.google.com/citations?user=z-25fk0AAAAJ&amp;hl=en" target="_blank" rel="noopener">Guoli Wang</a></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
 
       <footer class="site-footer">

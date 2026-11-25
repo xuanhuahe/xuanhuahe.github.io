@@ -1,0 +1,1 @@
+if(typeof renderMathInElement==="function"){const el=document.querySelector(".prose");if(el)renderMathInElement(el,{delimiters:[{left:"$$",right:"$$",display:true},{left:"$",right:"$",display:false}],throwOnError:false});}

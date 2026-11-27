@@ -1,7 +1,7 @@
 :root {
   color-scheme: light;
-  --bg: #faf9f6; --ink: #262622; --muted: #67665f; --quiet: #74736b;
-  --line: #e8e5de; --hover: #f0eee8; --panel: #f5f3ee; --accent: #4c6355;
+  --bg: #f5ede3; --ink: #39271f; --muted: #705345; --quiet: #795c4c;
+  --line: #ddcbb8; --hover: #eaddce; --panel: #efe2d5; --accent: #865137;
   --serif: "Newsreader", "Noto Serif SC", "Songti SC", Georgia, serif;
   --sans: "Inter", "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", system-ui, sans-serif;
   --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Consolas, monospace;
@@ -9,16 +9,17 @@
 }
 :root[data-theme="dark"] {
   color-scheme: dark;
-  --bg: #1b1c1a; --ink: #e9e8e3; --muted: #b1b1a7; --quiet: #a2a297;
-  --line: #343630; --hover: #272924; --panel: #242620; --accent: #b2c4ae;
+  --bg: #251b17; --ink: #f4e9de; --muted: #c7ac98; --quiet: #bc9c86;
+  --line: #4d392e; --hover: #3a2921; --panel: #31231d; --accent: #d6aa88;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme]) {
     color-scheme: dark;
-    --bg: #1b1c1a; --ink: #e9e8e3; --muted: #b1b1a7; --quiet: #a2a297;
-    --line: #343630; --hover: #272924; --panel: #242620; --accent: #b2c4ae;
+    --bg: #251b17; --ink: #f4e9de; --muted: #c7ac98; --quiet: #bc9c86;
+    --line: #4d392e; --hover: #3a2921; --panel: #31231d; --accent: #d6aa88;
   }
 }
+::selection { background: var(--hover); color: var(--ink); }
 *, *::before, *::after { box-sizing: border-box; }
 html { scroll-padding-top: 24px; }
 body { margin: 0; background: var(--bg); color: var(--ink); font: 400 15px/1.65 var(--sans); -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
@@ -69,7 +70,7 @@ h1 { font: 400 clamp(28px,3.8vw,40px)/1.22 var(--serif); letter-spacing: -.015em
 .filters { display: flex; flex-wrap: wrap; gap: 4px; margin-block: 12px 16px; }
 .filter { font: 400 11px/1.5 var(--mono); padding: 5px 9px; border-radius: 6px; border: 1px solid transparent; background: transparent; color: var(--muted); transition: color .16s,background .16s; }
 .filter:hover { background: var(--hover); color: var(--ink); }
-.filter[aria-pressed="true"] { background: var(--hover); border-color: var(--line); color: var(--ink); }
+.filter[aria-pressed="true"] { background: var(--hover); border-color: var(--line); color: var(--accent); }
 .post-row { display: grid; grid-template-columns: minmax(0,1fr) auto; align-items: center; column-gap: 18px; margin-inline: -8px; padding: 14px 8px; border-radius: 8px; transition: background .18s; }
 .post-row.has-cover { grid-template-columns: minmax(0,1fr) auto 76px; }
 .post-copy { min-width: 0; }
